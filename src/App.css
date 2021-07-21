@@ -2,3 +2,8 @@
   --primary-color: #d54c4c;
   --secondary-color: #fcd8d4;
 }
+
+.main-container {
+  padding-bottom: 100px;
+  border: 1px dashed #999;
+}
