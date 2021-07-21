@@ -19,6 +19,16 @@
   text-decoration: none;
 }
 
+.nav-item-sm {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--secondary-color);
+}
+
+.nav-item-sm:hover {
+  color: #fff;
+}
+
 .nav-logo {
   margin-left: 10px;
   font-weight: 600;

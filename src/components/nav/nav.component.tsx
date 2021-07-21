@@ -15,10 +15,10 @@ const Nav = () => {
         </Link>
       </div>
       <div className='nav-right'>
-        <Link to='/register' className='nav-item nav-link'>
+        <Link to='/register' className='nav-item nav-item-sm'>
           Register
         </Link>
-        <Link to='/signin' className='nav-item nav-link'>
+        <Link to='/signin' className='nav-item nav-item-sm'>
           Sign in
         </Link>
       </div>
