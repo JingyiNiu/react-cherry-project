@@ -1,10 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Nav from "./components/nav/nav.component";
+import Footer from "./components/footer/footer.component";
+
+import "./App.css";
 
 function App() {
   return (
-    <div>Cherry Project</div>
+    <div>
+      <Nav />
+      <Footer />
+    </div>
   );
 }
 
