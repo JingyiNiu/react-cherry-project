@@ -1,0 +1,30 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--primary-color);
+  margin-bottom: 20px;
+  border-bottom: 5px solid var(--secondary-color);
+}
+
+.nav-left,
+.nav-right {
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-item {
+  margin-right: 20px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-logo {
+  margin-left: 10px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.nav-link:hover {
+  border-bottom: 4px solid var(--secondary-color);
+}
