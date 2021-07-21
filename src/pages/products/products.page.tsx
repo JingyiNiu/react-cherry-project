@@ -1,4 +1,5 @@
-import ProductsTable from "../../components/products-table/products-table.component";
+import ProductsTable from "../../components/products-table/products-table.component"; // class component product table
+import ProductTable from "../../components/product-table/product-table.component"; // arrow function product table
 
 import "./products.style.css";
 
@@ -6,7 +7,7 @@ const Products = () => {
   return (
     <div className='main-container'>
       <h1>Product Page</h1>
-      <ProductsTable />
+      <ProductTable />
     </div>
   );
 };
