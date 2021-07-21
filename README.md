@@ -11,5 +11,5 @@ https://reactrouter.com/core/guides/quick-start
 
 ## Material-UI
 https://material-ui.com/getting-started/installation/
-```npm install @material-ui/core
-npm install @material-ui/icons```
+```npm install @material-ui/core```
+``npm install @material-ui/icons```
