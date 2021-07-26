@@ -1,4 +1,3 @@
-import ProductsTable from "../../components/products-table/products-table.component"; // class component product table
 import ProductTable from "../../components/product-table/product-table.component"; // arrow function product table
 
 import "./products.style.css";
