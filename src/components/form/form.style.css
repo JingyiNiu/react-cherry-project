@@ -28,6 +28,10 @@
   outline: none;
 }
 
+.input:invalid {
+  border-bottom: 1px solid red;
+}
+
 .input:focus + .label {
   font-size: 12px;
   top: -20px;

@@ -193,7 +193,7 @@ const ProductsTable = () => {
   };
   return (
     <div>
-      <Form />
+      {/* <Form /> */}
       <ProductsForm />
       <h2>Product Table Component</h2>
       <TableContainer component={Paper}>

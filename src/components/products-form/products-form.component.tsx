@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Errors } from "../../Interfaces/Errors";
 import { Input } from "../controls/Input";
+import { Product } from "../../Interfaces/Product";
+
+import axios from "axios";
 
 import { makeStyles } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
@@ -21,17 +24,17 @@ const initialFormValues = {
   productCode: "",
   imageUrl: "",
   desciption: "",
-  price: 0,
-  priceRrp: 0,
-  priceShopify: 0,
-  priceAgent: 0,
-  price1212: 0,
-  priceSpecial: 0,
-  height: 0,
-  width: 0,
-  length: 0,
-  weight: 0,
-  packageQty: 0,
+  price: "",
+  priceRrp: "",
+  priceShopify: "",
+  priceAgent: "",
+  price1212: "",
+  priceSpecial: "",
+  height: "",
+  width: "",
+  length: "",
+  weight: "",
+  packageQty: "",
 };
 
 const ProductsForm = () => {
@@ -43,8 +46,48 @@ const ProductsForm = () => {
     let temp = {} as Errors;
     temp.productName =
       values.productName.length !== 0 ? "" : "This field is required.";
-    // temp.length =
-    //   values.length && /[0-9]/.test(values.length) ? "" : "Numbers only";
+    if (values.length) {
+      temp.length = /^[0-9]+$/.test(values.length) ? "" : "Numbers only";
+    }
+    if (values.width) {
+      temp.width = /^[0-9]+$/.test(values.width) ? "" : "Numbers only";
+    }
+    if (values.height) {
+      temp.height = /^[0-9]+$/.test(values.height) ? "" : "Numbers only";
+    }
+    if (values.weight) {
+      temp.weight = /^[0-9]+$/.test(values.weight) ? "" : "Numbers only";
+    }
+    if (values.packageQty) {
+      temp.packageQty = /^[0-9]+$/.test(values.packageQty)
+        ? ""
+        : "Numbers only";
+    }
+    if (values.price) {
+      temp.price = /^[0-9]+$/.test(values.price) ? "" : "Numbers only";
+    }
+    if (values.priceRrp) {
+      temp.priceRrp = /^[0-9]+$/.test(values.priceRrp) ? "" : "Numbers only";
+    }
+    if (values.priceAgent) {
+      temp.priceAgent = /^[0-9]+$/.test(values.priceAgent)
+        ? ""
+        : "Numbers only";
+    }
+    if (values.priceShopify) {
+      temp.priceShopify = /^[0-9]+$/.test(values.priceShopify)
+        ? ""
+        : "Numbers only";
+    }
+    if (values.price1212) {
+      temp.price1212 = /^[0-9]+$/.test(values.price1212) ? "" : "Numbers only";
+    }
+    if (values.priceSpecial) {
+      temp.priceSpecial = /^[0-9]+$/.test(values.priceSpecial)
+        ? ""
+        : "Numbers only";
+    }
+
     setErrors({ ...temp });
 
     return Object.values(temp).every((x) => x == "");
@@ -61,8 +104,24 @@ const ProductsForm = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (validate()) {
-      console.log("values:", values);
-      console.log("errors:", errors);
+      const data: Product = {
+        productName: values.productName,
+        productCode: values.productCode,
+        imageUrl: values.imageUrl,
+        desciption: values.desciption,
+        price: parseInt(values.price),
+        priceRrp: parseInt(values.priceRrp),
+        priceShopify: parseInt(values.priceShopify),
+        priceAgent: parseInt(values.priceAgent),
+        price1212: parseInt(values.price1212),
+        priceSpecial: parseInt(values.priceSpecial),
+        height: parseInt(values.height),
+        width: parseInt(values.width),
+        length: parseInt(values.length),
+        weight: parseInt(values.weight),
+        packageQty: parseInt(values.packageQty),
+      };
+      axios.post("http://206.189.39.185:5031/api/Product/ProductCreate", data);
       resetForm();
     }
   };
@@ -109,31 +168,35 @@ const ProductsForm = () => {
             label='Length (cm)'
             onChange={handleInputChange}
             value={values.length}
-            // error={errors["length"]}
+            error={errors["length"]}
           />
           <Input
             name='width'
             label='Width (cm)'
             onChange={handleInputChange}
             value={values.width}
+            error={errors["width"]}
           />
           <Input
             name='height'
             label='Height (cm)'
             onChange={handleInputChange}
             value={values.height}
+            error={errors["height"]}
           />
           <Input
             name='weight'
             label='Weight (kg)'
             onChange={handleInputChange}
             value={values.weight}
+            error={errors["weight"]}
           />
           <Input
             name='packageQty'
             label='Package Quantity'
             onChange={handleInputChange}
             value={values.packageQty}
+            error={errors["packageQty"]}
           />
         </Grid>
         <Grid item xs={3}>
@@ -142,36 +205,42 @@ const ProductsForm = () => {
             label='Price'
             onChange={handleInputChange}
             value={values.price}
+            error={errors["price"]}
           />
           <Input
             name='priceRrp'
             label='RRP Price'
             onChange={handleInputChange}
             value={values.priceRrp}
+            error={errors["priceRrp"]}
           />
           <Input
             name='priceAgent'
             label='Agent Price'
             onChange={handleInputChange}
             value={values.priceAgent}
+            error={errors["priceAgent"]}
           />
           <Input
             name='priceShopify'
             label='Shopify Price'
             onChange={handleInputChange}
             value={values.priceShopify}
+            error={errors["priceShopify"]}
           />
           <Input
             name='price1212'
             label='12-12 Price'
             onChange={handleInputChange}
             value={values.price1212}
+            error={errors["price1212"]}
           />
           <Input
             name='priceSpecial'
             label='Special Price'
             onChange={handleInputChange}
             value={values.priceSpecial}
+            error={errors["priceSpecial"]}
           />
         </Grid>
         <div className='button-group products-btn-group'>
