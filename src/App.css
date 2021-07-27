@@ -12,3 +12,40 @@
 input::-webkit-input-placeholder {
   font-family: "Poppins";
 }
+
+.button-group {
+  margin: 20px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.button {
+  display: block;
+
+  margin-right: 10px;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-color-dark);
+}
+
+.btn-gray {
+  color: #666;
+  background-color: #eee;
+}
+
+.btn-gray:hover {
+  background-color: rgb(228, 228, 228);
+}
