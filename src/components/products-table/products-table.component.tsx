@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Product } from "../../Product";
+import { Product } from "../../Interfaces/Product";
 import ProductsForm from "../products-form/products-form.component";
+import Form from "../form/form.component";
 
 import {
   withStyles,
@@ -192,6 +193,7 @@ const ProductsTable = () => {
   };
   return (
     <div>
+      <Form />
       <ProductsForm />
       <h2>Product Table Component</h2>
       <TableContainer component={Paper}>

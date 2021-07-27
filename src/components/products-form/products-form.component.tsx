@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
-import { Product } from "../../Product";
-import "./products-form.style.css";
+import { useState } from "react";
+import { Errors } from "../../Interfaces/Errors";
+import { Input } from "../controls/Input";
 
 import { makeStyles } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
-import { TextField } from "@material-ui/core";
+
+import "./products-form.style.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const initialFormValues: Product = {
+const initialFormValues = {
   productName: "",
   productCode: "",
   imageUrl: "",
@@ -35,106 +36,141 @@ const initialFormValues: Product = {
 
 const ProductsForm = () => {
   const [values, setValues] = useState(initialFormValues);
+  const [errors, setErrors] = useState({});
   const classes = useStyles();
 
+  const validate = () => {
+    let temp = {} as Errors;
+    temp.productName =
+      values.productName.length !== 0 ? "" : "This field is required.";
+    // temp.length =
+    //   values.length && /[0-9]/.test(values.length) ? "" : "Numbers only";
+    setErrors({ ...temp });
+
+    return Object.values(temp).every((x) => x == "");
+  };
+
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    if (validate()) {
+      console.log("values:", values);
+      console.log("errors:", errors);
+      resetForm();
+    }
+  };
+
+  const resetForm = () => {
+    setValues(initialFormValues);
+  };
+
   return (
-    <form className={classes.root}>
+    <form className={classes.root} onSubmit={handleSubmit}>
       <h2>Product Table Form Component</h2>
       <Grid container>
         <Grid item xs={6}>
-          <TextField
-            variant='outlined'
-            name='productName'
+          <Input
             label='Product Name'
+            name='productName'
             value={values.productName}
+            onChange={handleInputChange}
+            error={errors["productName"]}
           />
-          <TextField
-            variant='outlined'
+          <Input
             name='productCode'
             label='Product Code'
+            onChange={handleInputChange}
             value={values.productCode}
           />
-          <TextField
-            variant='outlined'
-            name='description'
+          <Input
+            name='desciption'
             label='Description'
+            onChange={handleInputChange}
             value={values.desciption}
           />
 
-          <TextField
-            variant='outlined'
+          <Input
             name='imageUrl'
             label='Image URL'
+            onChange={handleInputChange}
             value={values.imageUrl}
           />
         </Grid>
         <Grid item xs={3}>
-          <TextField
-            variant='outlined'
+          <Input
             name='length'
             label='Length (cm)'
+            onChange={handleInputChange}
             value={values.length}
+            // error={errors["length"]}
           />
-          <TextField
-            variant='outlined'
+          <Input
             name='width'
             label='Width (cm)'
+            onChange={handleInputChange}
             value={values.width}
           />
-          <TextField
-            variant='outlined'
+          <Input
             name='height'
             label='Height (cm)'
+            onChange={handleInputChange}
             value={values.height}
           />
-          <TextField
-            variant='outlined'
+          <Input
             name='weight'
             label='Weight (kg)'
+            onChange={handleInputChange}
             value={values.weight}
           />
-          <TextField
-            variant='outlined'
+          <Input
             name='packageQty'
             label='Package Quantity'
+            onChange={handleInputChange}
             value={values.packageQty}
           />
         </Grid>
         <Grid item xs={3}>
-          <TextField
-            variant='outlined'
+          <Input
             name='price'
             label='Price'
+            onChange={handleInputChange}
             value={values.price}
           />
-          <TextField
-            variant='outlined'
+          <Input
             name='priceRrp'
             label='RRP Price'
+            onChange={handleInputChange}
             value={values.priceRrp}
           />
-          <TextField
-            variant='outlined'
+          <Input
             name='priceAgent'
             label='Agent Price'
+            onChange={handleInputChange}
             value={values.priceAgent}
           />
-          <TextField
-            variant='outlined'
+          <Input
             name='priceShopify'
             label='Shopify Price'
+            onChange={handleInputChange}
             value={values.priceShopify}
           />
-          <TextField
-            variant='outlined'
+          <Input
             name='price1212'
             label='12-12 Price'
+            onChange={handleInputChange}
             value={values.price1212}
           />
-          <TextField
-            variant='outlined'
+          <Input
             name='priceSpecial'
             label='Special Price'
+            onChange={handleInputChange}
             value={values.priceSpecial}
           />
         </Grid>
@@ -142,7 +178,9 @@ const ProductsForm = () => {
           <button className='button btn-primary' type='submit'>
             Submit
           </button>
-          <button className='button btn-gray'>Reset</button>
+          <button className='button btn-gray' onClick={resetForm}>
+            Reset
+          </button>
         </div>
       </Grid>
     </form>
