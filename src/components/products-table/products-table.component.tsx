@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Product } from "../../Interfaces/Product";
 import ProductsForm from "../products-form/products-form.component";
 import { Input } from "../controls/Input";
+import PopupDialog from "../popup-dialoge/popup-dialoge.component";
 
 import {
   withStyles,
@@ -191,14 +192,14 @@ const ProductsTable = () => {
     ).slice(page * rowsPerPage, (page + 1) * rowsPerPage);
   };
 
+  // ******************* Popup Dialog *******************
+  const [openPopup, setOpenPopup] = useState(false);
+
   return (
     <div>
-      <ProductsForm />
-
       {/* Top Bar */}
       <Toolbar className={classes.toolbar}>
         {/* Search Bar */}
-
         <Input
           label='Search Products'
           className={classes.searchInput}
@@ -213,8 +214,12 @@ const ProductsTable = () => {
         />
 
         {/* Add New Button */}
-
-        <button className={`button btn-primary ${classes.addButton}`}>
+        <button
+          className={`button btn-primary ${classes.addButton}`}
+          onClick={() => {
+            setOpenPopup(true);
+          }}
+        >
           + New Product
         </button>
       </Toolbar>
@@ -283,6 +288,13 @@ const ProductsTable = () => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </TableContainer>
+      <PopupDialog
+        title='Add New Product'
+        openPopup={openPopup}
+        setOpenPopup={setOpenPopup}
+      >
+        <ProductsForm />
+      </PopupDialog>
     </div>
   );
 };

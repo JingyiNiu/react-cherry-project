@@ -35,7 +35,6 @@ const PopupDialog = (props) => {
             {title}
           </Typography>
           <ActionButton
-            color='secondary'
             onClick={() => {
               setOpenPopup(false);
             }}
