@@ -23,7 +23,7 @@ import {
 
 import "./products-table.style.css";
 
-// Material-UI Table
+// ******************* Material-UI Table *******************
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -80,16 +80,27 @@ const ProductsTable = () => {
     id: string;
     label: string;
     numeric: boolean;
+    disableSorting: boolean;
   }
   const headCells: HeadCell[] = [
-    { id: "productName", numeric: false, label: "Product Name" },
-    { id: "desciption", numeric: true, label: "Description" },
-    { id: "price", numeric: true, label: "Price" },
-    { id: "weight", numeric: true, label: "Weight" },
-    { id: "size", numeric: true, label: "L × W × H" },
-    { id: "actions", numeric: true, label: "Actions" },
+    {
+      id: "productName",
+      numeric: false,
+      label: "Product Name",
+      disableSorting: false,
+    },
+    {
+      id: "desciption",
+      numeric: true,
+      label: "Description",
+      disableSorting: false,
+    },
+    { id: "price", numeric: true, label: "Price", disableSorting: false },
+    { id: "weight", numeric: true, label: "Weight", disableSorting: false },
+    { id: "size", numeric: true, label: "L × W × H", disableSorting: false },
+    { id: "actions", numeric: true, label: "Actions", disableSorting: true },
   ];
-  // Pagination
+  // ******************* Pagination *******************
   const pages = [10, 15, 25];
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(pages[page]);
@@ -103,7 +114,7 @@ const ProductsTable = () => {
     setPage(0);
   };
 
-  // Sorting
+  // ******************* Sorting *******************
   const [order, setOrder] = useState<any>();
   const [orderBy, setOrderBy] = useState<any>();
 
@@ -138,7 +149,7 @@ const ProductsTable = () => {
     }
     return 0;
   }
-  // 分页或排序后，每页显示的产品index（每页5条，则第一页显示0-4，第二页5-9）
+
   const productsAfterPagingAndSoring = () => {
     return stableSort(products, getComparator(order, orderBy)).slice(
       page * rowsPerPage,
@@ -156,20 +167,27 @@ const ProductsTable = () => {
           {/* Table Head */}
           <TableHead>
             <StyledTableRow>
+              {/* Table Cell */}
               {headCells.map((headCell) => (
                 <StyledTableCell
                   key={headCell.id}
                   align={headCell.numeric ? "right" : "left"}
+                  sortDirection={orderBy === headCell.id ? order : false}
                 >
-                  <TableSortLabel
-                    active={orderBy === headCell.id}
-                    direction={orderBy === headCell.id ? order : "asc"}
-                    onClick={() => {
-                      handleSortRequest(headCell.id);
-                    }}
-                  >
-                    {headCell.label}
-                  </TableSortLabel>
+                  {/* Table Sort Label */}
+                  {headCell.disableSorting ? (
+                    headCell.label
+                  ) : (
+                    <TableSortLabel
+                      active={orderBy === headCell.id}
+                      direction={orderBy === headCell.id ? order : "asc"}
+                      onClick={() => {
+                        handleSortRequest(headCell.id);
+                      }}
+                    >
+                      {headCell.label}
+                    </TableSortLabel>
+                  )}
                 </StyledTableCell>
               ))}
             </StyledTableRow>
