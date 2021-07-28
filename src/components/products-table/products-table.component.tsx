@@ -76,7 +76,12 @@ const ProductsTable = () => {
 
   const classes = useStyles();
 
-  const headCells = [
+  interface HeadCell {
+    id: string;
+    label: string;
+    numeric: boolean;
+  }
+  const headCells: HeadCell[] = [
     { id: "productName", numeric: false, label: "Product Name" },
     { id: "desciption", numeric: true, label: "Description" },
     { id: "price", numeric: true, label: "Price" },
@@ -104,10 +109,12 @@ const ProductsTable = () => {
   };
 
   // Sorting
-  const [order, setOrder] = useState();
-  const [orderBy, setOrderBy] = useState();
+  const [order, setOrder] = useState<any>();
+  const [orderBy, setOrderBy] = useState<any>();
 
   const handleSortRequest = (cellId) => {
+    const isAsc = orderBy === cellId && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(cellId);
   };
 
