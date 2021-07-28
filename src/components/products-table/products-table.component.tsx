@@ -160,20 +160,20 @@ const ProductsTable = () => {
   }
 
   // ******************* Filter *******************
-  const [filterFn, setFilterFn] = useState({
-    fn: (items) => {
-      return items;
+  const [filterFunction, setFilterFunction] = useState({
+    func: (products) => {
+      return products;
     },
   });
 
   const handleSearch = (e) => {
     let target = e.target;
-    setFilterFn({
-      fn: (items) => {
-        if (target.value == "") return items;
+    setFilterFunction({
+      func: (products) => {
+        if (target.value == "") return products;
         else
-          return items.filter((x) =>
-            x.productName.toLowerCase().includes(target.value)
+          return products.filter((product) =>
+            product.productName.toLowerCase().includes(target.value)
           );
       },
     });
@@ -181,7 +181,7 @@ const ProductsTable = () => {
 
   const productsAfterPagingAndSoring = () => {
     return stableSort(
-      filterFn.fn(products),
+      filterFunction.func(products),
       getComparator(order, orderBy)
     ).slice(page * rowsPerPage, (page + 1) * rowsPerPage);
   };
