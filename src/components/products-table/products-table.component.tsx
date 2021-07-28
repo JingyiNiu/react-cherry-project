@@ -103,11 +103,6 @@ const ProductsTable = () => {
     setPage(0);
   };
 
-  const productsAfterPagingAndSoring = () => {
-    // 分页或排序后，每页显示的产品index（每页5条，则第一页显示0-4，第二页5-9）
-    return products.slice(page * rowsPerPage, (page + 1) * rowsPerPage);
-  };
-
   // Sorting
   const [order, setOrder] = useState<any>();
   const [orderBy, setOrderBy] = useState<any>();
@@ -116,6 +111,39 @@ const ProductsTable = () => {
     const isAsc = orderBy === cellId && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(cellId);
+  };
+
+  function stableSort(array, comparator) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      if (order !== 0) return order;
+      return a[1] - b[1];
+    });
+    return stabilizedThis.map((el) => el[0]);
+  }
+
+  function getComparator(order, orderBy) {
+    return order === "desc"
+      ? (a, b) => descendingComparator(a, b, orderBy)
+      : (a, b) => -descendingComparator(a, b, orderBy);
+  }
+
+  function descendingComparator(a, b, orderBy) {
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
+  }
+  // 分页或排序后，每页显示的产品index（每页5条，则第一页显示0-4，第二页5-9）
+  const productsAfterPagingAndSoring = () => {
+    return stableSort(products, getComparator(order, orderBy)).slice(
+      page * rowsPerPage,
+      (page + 1) * rowsPerPage
+    );
   };
 
   return (
@@ -134,6 +162,7 @@ const ProductsTable = () => {
                   align={headCell.numeric ? "right" : "left"}
                 >
                   <TableSortLabel
+                    active={orderBy === headCell.id}
                     direction={orderBy === headCell.id ? order : "asc"}
                     onClick={() => {
                       handleSortRequest(headCell.id);
