@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Product } from "../../Interfaces/Product";
 import ProductsForm from "../products-form/products-form.component";
+import { Input } from "../controls/Input";
 
 import {
   withStyles,
@@ -19,7 +20,10 @@ import {
   TableCell,
   TablePagination,
   TableSortLabel,
+  Toolbar,
+  InputAdornment,
 } from "@material-ui/core";
+import { Search } from "@material-ui/icons";
 
 import "./products-table.style.css";
 
@@ -54,6 +58,12 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  searchInput: {
+    width: "50%",
+  },
+  toolbar: {
+    marginBottom: "20px",
+  },
 });
 
 const ProductsTable = () => {
@@ -61,6 +71,7 @@ const ProductsTable = () => {
     getProducts();
   }, []);
 
+  const classes = useStyles();
   const [products, setProducts] = useState<Product[]>([]);
 
   const getProducts = () => {
@@ -73,8 +84,6 @@ const ProductsTable = () => {
       setProducts(productsList);
     });
   };
-
-  const classes = useStyles();
 
   interface HeadCell {
     id: string;
@@ -150,18 +159,56 @@ const ProductsTable = () => {
     return 0;
   }
 
+  // ******************* Filter *******************
+  const [filterFn, setFilterFn] = useState({
+    fn: (items) => {
+      return items;
+    },
+  });
+
+  const handleSearch = (e) => {
+    let target = e.target;
+    setFilterFn({
+      fn: (items) => {
+        if (target.value == "") return items;
+        else
+          return items.filter((x) =>
+            x.productName.toLowerCase().includes(target.value)
+          );
+      },
+    });
+  };
+
   const productsAfterPagingAndSoring = () => {
-    return stableSort(products, getComparator(order, orderBy)).slice(
-      page * rowsPerPage,
-      (page + 1) * rowsPerPage
-    );
+    return stableSort(
+      filterFn.fn(products),
+      getComparator(order, orderBy)
+    ).slice(page * rowsPerPage, (page + 1) * rowsPerPage);
   };
 
   return (
     <div>
       {/* <Form /> */}
-      <ProductsForm />
+      {/* <ProductsForm /> */}
       <h2>Product Table Component</h2>
+
+      {/* Search Bar */}
+      <Toolbar className={classes.toolbar}>
+        <Input
+          label='Search Products'
+          className={classes.searchInput}
+          onChange={handleSearch}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position='start'>
+                <Search />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Toolbar>
+
+      {/* Table */}
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label='simple table'>
           {/* Table Head */}
