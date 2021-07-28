@@ -59,10 +59,14 @@ const useStyles = makeStyles({
     minWidth: 650,
   },
   searchInput: {
-    width: "50%",
+    width: "60%",
   },
   toolbar: {
     marginBottom: "20px",
+  },
+  addButton: {
+    position: "absolute",
+    right: "10px",
   },
 });
 
@@ -109,6 +113,7 @@ const ProductsTable = () => {
     { id: "size", numeric: true, label: "L × W × H", disableSorting: false },
     { id: "actions", numeric: true, label: "Actions", disableSorting: true },
   ];
+
   // ******************* Pagination *******************
   const pages = [10, 15, 25];
   const [page, setPage] = useState(0);
@@ -188,11 +193,12 @@ const ProductsTable = () => {
 
   return (
     <div>
-      {/* <Form /> */}
-      {/* <ProductsForm /> */}
+      <ProductsForm />
 
-      {/* Search Bar */}
+      {/* Top Bar */}
       <Toolbar className={classes.toolbar}>
+        {/* Search Bar */}
+
         <Input
           label='Search Products'
           className={classes.searchInput}
@@ -205,6 +211,12 @@ const ProductsTable = () => {
             ),
           }}
         />
+
+        {/* Add New Button */}
+
+        <button className={`button btn-primary ${classes.addButton}`}>
+          + New Product
+        </button>
       </Toolbar>
 
       {/* Table */}
