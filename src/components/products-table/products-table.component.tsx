@@ -190,7 +190,6 @@ const ProductsTable = () => {
     <div>
       {/* <Form /> */}
       {/* <ProductsForm /> */}
-      <h2>Product Table Component</h2>
 
       {/* Search Bar */}
       <Toolbar className={classes.toolbar}>

@@ -5,7 +5,7 @@ import "./products.style.css";
 const Products = () => {
   return (
     <div className='main-container'>
-      <h1>Product Page</h1>
+      <h1>Products Page</h1>
       <ProductsTable />
     </div>
   );
