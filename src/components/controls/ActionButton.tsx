@@ -6,16 +6,16 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 0,
     margin: theme.spacing(0.5),
   },
-  secondary: {
-    backgroundColor: "#fce4ec",
+  edit: {
+    backgroundColor: "#B8DFD8",
     "& .MuiButton-label": {
-      color: theme.palette.secondary.main,
+      color: "#3C8DAD",
     },
   },
-  primary: {
-    backgroundColor: "#e3f2fd",
+  delete: {
+    backgroundColor: "#fcd8d4",
     "& .MuiButton-label": {
-      color: theme.palette.primary.main,
+      color: "#d54c4c",
     },
   },
 }));

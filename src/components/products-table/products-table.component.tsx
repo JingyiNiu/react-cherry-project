@@ -27,7 +27,7 @@ import {
   InputAdornment,
 } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
-import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
+import EditIcon from "@material-ui/icons/Edit";
 import CloseIcon from "@material-ui/icons/Close";
 
 import "./products-table.style.css";
@@ -62,6 +62,12 @@ const StyledTableRow = withStyles((theme: Theme) =>
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
+  },
+  tableRow: {
+    "&:hover": {
+      backgroundColor: "#fffbf6",
+      cursor: "pointer",
+    },
   },
   searchInput: {
     width: "60%",
@@ -288,7 +294,10 @@ const ProductsTable = () => {
           <TableBody>
             {productsAfterPagingAndSoring().map((item) => {
               return (
-                <StyledTableRow key={item.productId}>
+                <StyledTableRow
+                  key={item.productId}
+                  className={classes.tableRow}
+                >
                   {/* Product Details */}
                   <StyledTableCell>{item.productName}</StyledTableCell>
                   <StyledTableCell align='right'>
@@ -303,8 +312,8 @@ const ProductsTable = () => {
                   {/* Actions */}
                   <StyledTableCell align='right'>
                     {/* Edit Button*/}
-                    <ActionButton color='primary'>
-                      <EditOutlinedIcon
+                    <ActionButton color='edit'>
+                      <EditIcon
                         fontSize='small'
                         onClick={() => {
                           openInPopup(item);
@@ -313,7 +322,7 @@ const ProductsTable = () => {
                     </ActionButton>
 
                     {/* Delete Button */}
-                    <ActionButton color='secondary'>
+                    <ActionButton color='delete'>
                       <CloseIcon
                         fontSize='small'
                         onClick={() => {
