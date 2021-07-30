@@ -38,9 +38,12 @@ const initialFormValues = {
   packageQty: "",
 };
 
-const ProductsForm = () => {
+const ProductsForm = (props) => {
   const [values, setValues] = useState(initialFormValues);
   const [errors, setErrors] = useState({});
+
+  const { setOpenPopup } = props;
+
   const classes = useStyles();
 
   const validate = () => {
@@ -102,6 +105,10 @@ const ProductsForm = () => {
     });
   };
 
+  const resetForm = () => {
+    setValues(initialFormValues);
+  };
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (validate()) {
@@ -125,11 +132,8 @@ const ProductsForm = () => {
       };
       axios.post("http://206.189.39.185:5031/api/Product/ProductCreate", data);
       resetForm();
+      setOpenPopup(false);
     }
-  };
-
-  const resetForm = () => {
-    setValues(initialFormValues);
   };
 
   return (

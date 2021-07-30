@@ -2,8 +2,9 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Product } from "../../Interfaces/Product";
 import ProductsForm from "../products-form/products-form.component";
-import { Input } from "../controls/Input";
 import PopupDialog from "../popup-dialoge/popup-dialoge.component";
+import { Input } from "../controls/Input";
+import ActionButton from "../controls/ActionButton";
 
 import {
   withStyles,
@@ -25,6 +26,8 @@ import {
   InputAdornment,
 } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
+import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
+import CloseIcon from "@material-ui/icons/Close";
 
 import "./products-table.style.css";
 
@@ -270,7 +273,14 @@ const ProductsTable = () => {
                   <StyledTableCell align='right'>
                     {item.length} * {item.width} * {item.height}
                   </StyledTableCell>
-                  <StyledTableCell align='right'></StyledTableCell>
+                  <StyledTableCell align='right'>
+                    <ActionButton color='primary'>
+                      <EditOutlinedIcon fontSize='small' />
+                    </ActionButton>
+                    <ActionButton color='secondary'>
+                      <CloseIcon fontSize='small' />
+                    </ActionButton>
+                  </StyledTableCell>
                 </StyledTableRow>
               );
             })}
@@ -288,12 +298,13 @@ const ProductsTable = () => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </TableContainer>
+
       <PopupDialog
         title='Add New Product'
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
       >
-        <ProductsForm />
+        <ProductsForm setOpenPopup={setOpenPopup} />
       </PopupDialog>
     </div>
   );

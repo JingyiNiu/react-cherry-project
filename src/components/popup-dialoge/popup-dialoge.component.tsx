@@ -29,11 +29,15 @@ const PopupDialog = (props) => {
       maxWidth='md'
       classes={{ paper: classes.dialogWrapper }}
     >
+      {/* Popup Header */}
       <DialogTitle className={classes.dialogTitle}>
         <div style={{ display: "flex" }}>
+          {/* Popup Title */}
           <Typography variant='h6' component='div' style={{ flexGrow: 1 }}>
             {title}
           </Typography>
+
+          {/* Close Button */}
           <ActionButton
             onClick={() => {
               setOpenPopup(false);
@@ -43,6 +47,8 @@ const PopupDialog = (props) => {
           </ActionButton>
         </div>
       </DialogTitle>
+
+      {/* Popup Content */}
       <DialogContent dividers>{children}</DialogContent>
     </Dialog>
   );
