@@ -75,12 +75,12 @@ const useStyles = makeStyles({
 });
 
 const ProductsTable = () => {
-  useEffect(() => {
-    getProducts();
-  }, []);
-
   const classes = useStyles();
   const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    getProducts();
+  }, [products]);
 
   const getProducts = () => {
     const productsList: Product[] = [];

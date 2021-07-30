@@ -130,7 +130,14 @@ const ProductsForm = (props) => {
         weight: parseInt(values.weight),
         packageQty: parseInt(values.packageQty),
       };
-      axios.post("http://206.189.39.185:5031/api/Product/ProductCreate", data);
+      if (data.productId == null) {
+        axios.post(
+          "http://206.189.39.185:5031/api/Product/ProductCreate",
+          data
+        );
+      } else {
+        axios.put("http://206.189.39.185:5031/api/Product/ProductUpdate", data);
+      }
       resetForm();
       setOpenPopup(false);
     }
