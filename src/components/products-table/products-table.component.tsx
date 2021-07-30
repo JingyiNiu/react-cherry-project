@@ -212,6 +212,9 @@ const ProductsTable = () => {
     type: "",
   });
 
+  const onDelete = (prodId) => {
+    axios.delete("http://206.189.39.185:5031/api/Product/" + prodId);
+  };
   // ******************* Return *******************
   return (
     <div>
@@ -278,7 +281,7 @@ const ProductsTable = () => {
           <TableBody>
             {productsAfterPagingAndSoring().map((item) => {
               return (
-                <StyledTableRow key={item.prodId}>
+                <StyledTableRow key={item.productId}>
                   {/* Product Details */}
                   <StyledTableCell>{item.productName}</StyledTableCell>
                   <StyledTableCell align='right'>
@@ -297,16 +300,19 @@ const ProductsTable = () => {
                       <EditOutlinedIcon
                         fontSize='small'
                         onClick={() => {
-                          {
-                            openInPopup(item);
-                          }
+                          openInPopup(item);
                         }}
                       />
                     </ActionButton>
 
                     {/* Delete Button */}
                     <ActionButton color='secondary'>
-                      <CloseIcon fontSize='small' />
+                      <CloseIcon
+                        fontSize='small'
+                        onClick={() => {
+                          onDelete(item.productId);
+                        }}
+                      />
                     </ActionButton>
                   </StyledTableCell>
                 </StyledTableRow>
