@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialFormValues = {
+  productId: "",
   productName: "",
   productCode: "",
   imageUrl: "",
@@ -105,6 +106,7 @@ const ProductsForm = () => {
     e.preventDefault();
     if (validate()) {
       const data: Product = {
+        productId: values.productId,
         productName: values.productName,
         productCode: values.productCode,
         imageUrl: values.imageUrl,

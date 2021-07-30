@@ -258,9 +258,9 @@ const ProductsTable = () => {
 
           {/* Table Body */}
           <TableBody>
-            {productsAfterPagingAndSoring().map((item, index) => {
+            {productsAfterPagingAndSoring().map((item) => {
               return (
-                <StyledTableRow key={index}>
+                <StyledTableRow key={item.prodId}>
                   <StyledTableCell>{item.productName}</StyledTableCell>
                   <StyledTableCell align='right'>
                     {item.desciption}
