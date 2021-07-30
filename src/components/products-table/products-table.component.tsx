@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Product } from "../../Interfaces/Product";
 import ProductsForm from "../products-form/products-form.component";
 import PopupDialog from "../popup-dialoge/popup-dialoge.component";
+import Notification from "../notification/notification.component";
 import { Input } from "../controls/Input";
 import ActionButton from "../controls/ActionButton";
 
@@ -204,6 +205,13 @@ const ProductsTable = () => {
     setOpenPopup(true);
   };
 
+  // ******************* Notification *******************
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+
   // ******************* Return *******************
   return (
     <div>
@@ -291,7 +299,6 @@ const ProductsTable = () => {
                         onClick={() => {
                           {
                             openInPopup(item);
-                            setRecordForEdit(null);
                           }
                         }}
                       />
@@ -320,6 +327,7 @@ const ProductsTable = () => {
         />
       </TableContainer>
 
+      {/* Popup Dialog */}
       <PopupDialog
         title='Add New Product'
         openPopup={openPopup}
@@ -328,9 +336,12 @@ const ProductsTable = () => {
         <ProductsForm
           setOpenPopup={setOpenPopup}
           recordForEdit={recordForEdit}
-          setRecordForEdit={setRecordForEdit}
+          setNotify={setNotify}
         />
       </PopupDialog>
+
+      {/* Notification */}
+      <Notification notify={notify} setNotify={setNotify} />
     </div>
   );
 };

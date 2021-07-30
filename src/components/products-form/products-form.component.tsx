@@ -42,7 +42,7 @@ const ProductsForm = (props) => {
   const [values, setValues] = useState(initialFormValues);
   const [errors, setErrors] = useState({});
 
-  const { setOpenPopup, recordForEdit, setRecordForEdit } = props;
+  const { setOpenPopup, recordForEdit, setNotify } = props;
 
   const classes = useStyles();
 
@@ -139,8 +139,12 @@ const ProductsForm = (props) => {
         axios.put("http://206.189.39.185:5031/api/Product/ProductUpdate", data);
       }
       resetForm();
-      setRecordForEdit(null);
       setOpenPopup(false);
+      setNotify({
+        isOpen: true,
+        message: "Submitted Successfully",
+        type: "success",
+      });
     }
   };
 
