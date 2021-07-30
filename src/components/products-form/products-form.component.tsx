@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Errors } from "../../Interfaces/Errors";
 import { Input } from "../controls/Input";
 import { Product } from "../../Interfaces/Product";
@@ -42,7 +42,7 @@ const ProductsForm = (props) => {
   const [values, setValues] = useState(initialFormValues);
   const [errors, setErrors] = useState({});
 
-  const { setOpenPopup } = props;
+  const { setOpenPopup, recordForEdit } = props;
 
   const classes = useStyles();
 
@@ -135,6 +135,14 @@ const ProductsForm = (props) => {
       setOpenPopup(false);
     }
   };
+
+  // Detect change of [recordForEdit]
+  useEffect(() => {
+    if (recordForEdit != null)
+      setValues({
+        ...recordForEdit,
+      });
+  }, [recordForEdit]);
 
   return (
     <form className={classes.root} onSubmit={handleSubmit}>

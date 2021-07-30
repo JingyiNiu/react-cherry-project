@@ -197,7 +197,14 @@ const ProductsTable = () => {
 
   // ******************* Popup Dialog *******************
   const [openPopup, setOpenPopup] = useState(false);
+  const [recordForEdit, setRecordForEdit] = useState(null);
 
+  const openInPopup = (item) => {
+    setRecordForEdit(item);
+    setOpenPopup(true);
+  };
+
+  // ******************* Return *******************
   return (
     <div>
       {/* Top Bar */}
@@ -264,6 +271,7 @@ const ProductsTable = () => {
             {productsAfterPagingAndSoring().map((item) => {
               return (
                 <StyledTableRow key={item.prodId}>
+                  {/* Product Details */}
                   <StyledTableCell>{item.productName}</StyledTableCell>
                   <StyledTableCell align='right'>
                     {item.desciption}
@@ -273,10 +281,20 @@ const ProductsTable = () => {
                   <StyledTableCell align='right'>
                     {item.length} * {item.width} * {item.height}
                   </StyledTableCell>
+
+                  {/* Actions */}
                   <StyledTableCell align='right'>
+                    {/* Edit Button*/}
                     <ActionButton color='primary'>
-                      <EditOutlinedIcon fontSize='small' />
+                      <EditOutlinedIcon
+                        fontSize='small'
+                        onClick={() => {
+                          openInPopup(item);
+                        }}
+                      />
                     </ActionButton>
+
+                    {/* Delete Button */}
                     <ActionButton color='secondary'>
                       <CloseIcon fontSize='small' />
                     </ActionButton>
@@ -304,7 +322,10 @@ const ProductsTable = () => {
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
       >
-        <ProductsForm setOpenPopup={setOpenPopup} />
+        <ProductsForm
+          setOpenPopup={setOpenPopup}
+          recordForEdit={recordForEdit}
+        />
       </PopupDialog>
     </div>
   );
