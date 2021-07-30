@@ -213,7 +213,14 @@ const ProductsTable = () => {
   });
 
   const onDelete = (prodId) => {
-    axios.delete("http://206.189.39.185:5031/api/Product/" + prodId);
+    if (window.confirm("Are you sure to delete this product?")) {
+      axios.delete("http://206.189.39.185:5031/api/Product/" + prodId);
+      setNotify({
+        isOpen: true,
+        message: "Deleted Successfully",
+        type: "error",
+      });
+    }
   };
   // ******************* Return *******************
   return (

@@ -26,7 +26,7 @@ const Notification = (props) => {
     <Snackbar
       className={classes.root}
       open={notify.isOpen}
-      autoHideDuration={2000}
+      autoHideDuration={1500}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       onClose={handleClose}
     >
