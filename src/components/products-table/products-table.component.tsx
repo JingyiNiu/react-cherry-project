@@ -289,7 +289,10 @@ const ProductsTable = () => {
                       <EditOutlinedIcon
                         fontSize='small'
                         onClick={() => {
-                          openInPopup(item);
+                          {
+                            openInPopup(item);
+                            setRecordForEdit(null);
+                          }
                         }}
                       />
                     </ActionButton>
@@ -325,6 +328,7 @@ const ProductsTable = () => {
         <ProductsForm
           setOpenPopup={setOpenPopup}
           recordForEdit={recordForEdit}
+          setRecordForEdit={setRecordForEdit}
         />
       </PopupDialog>
     </div>
