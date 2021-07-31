@@ -26,11 +26,6 @@ import {
   TableSortLabel,
   Toolbar,
   InputAdornment,
-  Collapse,
-  Box,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
 } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import EditIcon from "@material-ui/icons/Edit";
@@ -56,7 +51,9 @@ const StyledTableCell = withStyles((theme: Theme) =>
 const StyledTableRow = withStyles((theme: Theme) =>
   createStyles({
     root: {
-      "&:nth-of-type(even)": {},
+      "&:nth-of-type(even)": {
+        backgroundColor: theme.palette.action.hover,
+      },
     },
   })
 )(TableRow);
@@ -283,7 +280,6 @@ const ProductsTableCopy = () => {
           <TableHead>
             <StyledTableRow>
               {/* Table Cell */}
-              {/* <StyledTableCell /> */}
               {headCells.map((headCell) => (
                 <StyledTableCell
                   key={headCell.id}
@@ -315,89 +311,59 @@ const ProductsTableCopy = () => {
             {productsAfterPagingAndSoring().map((item) => {
               return (
                 <>
-                  <Accordion>
-                    <AccordionSummary>
-                      <StyledTableRow
-                        key={item.productId}
-                        className={classes.tableRow}
-                      >
-                        {/* Product Details */}
-                        {/* <StyledTableCell>
-                      <IconButton
-                        aria-label='expand'
-                        size='small'
-                        onClick={() => setOpen(!open)}
-                      >
-                        {open ? (
-                          <KeyboardArrowUpIcon />
-                        ) : (
-                          <KeyboardArrowDownIcon />
-                        )}
-                      </IconButton>
-                    </StyledTableCell> */}
-
-                        <StyledTableCell>{item.productName}</StyledTableCell>
-                        <StyledTableCell align='right'>
-                          {item.desciption}
-                        </StyledTableCell>
-                        <StyledTableCell align='right'>
-                          {item.price}
-                        </StyledTableCell>
-                        <StyledTableCell align='right'>
-                          {item.weight}
-                        </StyledTableCell>
-                        <StyledTableCell align='right'>
-                          {item.length} * {item.width} * {item.height}
-                        </StyledTableCell>
-                        <StyledTableCell align='right'>
-                          {item.createdAt.substring(0, 10)}
-                        </StyledTableCell>
-
-                        {/* Actions */}
-                        <StyledTableCell align='right'>
-                          {/* Edit Button*/}
-                          <ActionButton color='edit'>
-                            <EditIcon
-                              fontSize='small'
-                              onClick={() => {
-                                openInPopup(item);
-                              }}
-                            />
-                          </ActionButton>
-
-                          {/* Delete Button */}
-                          <ActionButton color='delete'>
-                            <CloseIcon
-                              fontSize='small'
-                              onClick={() => {
-                                // onDelete(item.productId);
-                                setConfirmDialog({
-                                  isOpen: true,
-                                  title: "Are you sure to delete this product?",
-                                  subTitle: "You can't undo this operation",
-                                  onConfirm: () => {
-                                    onDelete(item.productId);
-                                  },
-                                });
-                              }}
-                            />
-                          </ActionButton>
-                        </StyledTableCell>
-                        <StyledTableCell />
-                      </StyledTableRow>
-                    </AccordionSummary>
-                    <AccordionDetails>{item.desciption}</AccordionDetails>
-                  </Accordion>
-                  {/* <StyledTableRow>
-                    <StyledTableCell
-                      style={{ paddingBottom: 0, paddingTop: 0 }}
-                      colSpan={8}
-                    >
-                      <Collapse in={open} timeout='auto' unmountOnExit>
-                        <Box margin={2}>{item.productName}</Box>
-                      </Collapse>
+                  <StyledTableRow
+                    key={item.productId}
+                    className={classes.tableRow}
+                  >
+                    <StyledTableCell>{item.productName}</StyledTableCell>
+                    <StyledTableCell align='right'>
+                      {item.desciption}
                     </StyledTableCell>
-                  </StyledTableRow> */}
+                    <StyledTableCell align='right'>
+                      {item.price}
+                    </StyledTableCell>
+                    <StyledTableCell align='right'>
+                      {item.weight}
+                    </StyledTableCell>
+                    <StyledTableCell align='right'>
+                      {item.length} * {item.width} * {item.height}
+                    </StyledTableCell>
+                    <StyledTableCell align='right'>
+                      {item.createdAt.substring(0, 10)}
+                    </StyledTableCell>
+
+                    {/* Actions */}
+                    <StyledTableCell align='right'>
+                      {/* Edit Button*/}
+                      <ActionButton color='edit'>
+                        <EditIcon
+                          fontSize='small'
+                          onClick={() => {
+                            openInPopup(item);
+                          }}
+                        />
+                      </ActionButton>
+
+                      {/* Delete Button */}
+                      <ActionButton color='delete'>
+                        <CloseIcon
+                          fontSize='small'
+                          onClick={() => {
+                            // onDelete(item.productId);
+                            setConfirmDialog({
+                              isOpen: true,
+                              title: "Are you sure to delete this product?",
+                              subTitle: "You can't undo this operation",
+                              onConfirm: () => {
+                                onDelete(item.productId);
+                              },
+                            });
+                          }}
+                        />
+                      </ActionButton>
+                    </StyledTableCell>
+                    <StyledTableCell />
+                  </StyledTableRow>
                 </>
               );
             })}
