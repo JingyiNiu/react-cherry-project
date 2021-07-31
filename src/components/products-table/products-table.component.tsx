@@ -4,6 +4,7 @@ import { Product } from "../../Interfaces/Product";
 import ProductsForm from "../products-form/products-form.component";
 import PopupDialog from "../popup-dialoge/popup-dialoge.component";
 import Notification from "../notification/notification.component";
+import ComfirmDialog from "../comfirm-dialog/comfirm-dialog.component";
 import { Input } from "../controls/Input";
 import ActionButton from "../controls/ActionButton";
 
@@ -219,15 +220,25 @@ const ProductsTable = () => {
   });
 
   const onDelete = (prodId) => {
-    if (window.confirm("Are you sure to delete this product?")) {
-      axios.delete("http://206.189.39.185:5031/api/Product/" + prodId);
-      setNotify({
-        isOpen: true,
-        message: "Deleted Successfully",
-        type: "error",
-      });
-    }
+    setConfirmDialog({
+      ...confirmDialog,
+      isOpen: false,
+    });
+    axios.delete("http://206.189.39.185:5031/api/Product/" + prodId);
+    setNotify({
+      isOpen: true,
+      message: "Deleted Successfully",
+      type: "error",
+    });
   };
+
+  // ******************* Confirm Dialog *******************
+  const [confirmDialog, setConfirmDialog] = useState<any>({
+    isOpen: false,
+    title: "",
+    subTitle: "",
+  });
+
   // ******************* Return *******************
   return (
     <div>
@@ -326,7 +337,15 @@ const ProductsTable = () => {
                       <CloseIcon
                         fontSize='small'
                         onClick={() => {
-                          onDelete(item.productId);
+                          // onDelete(item.productId);
+                          setConfirmDialog({
+                            isOpen: true,
+                            title: "Are you sure to delete this product?",
+                            subTitle: "You can't undo this operation",
+                            onConfirm: () => {
+                              onDelete(item.productId);
+                            },
+                          });
                         }}
                       />
                     </ActionButton>
@@ -364,6 +383,12 @@ const ProductsTable = () => {
 
       {/* Notification */}
       <Notification notify={notify} setNotify={setNotify} />
+
+      {/* Confirm Dialog */}
+      <ComfirmDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+      ></ComfirmDialog>
     </div>
   );
 };

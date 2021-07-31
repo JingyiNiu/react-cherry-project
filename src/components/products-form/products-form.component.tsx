@@ -51,45 +51,45 @@ const ProductsForm = (props) => {
     temp.productName =
       values.productName.length !== 0 ? "" : "This field is required.";
     if (values.length) {
-      temp.length = /^[0-9]+$/.test(values.length) ? "" : "Numbers only";
+      temp.length = /^[0-9]+$/.test(values.length) ? "" : "Integer only";
     }
     if (values.width) {
-      temp.width = /^[0-9]+$/.test(values.width) ? "" : "Numbers only";
+      temp.width = /^[0-9]+$/.test(values.width) ? "" : "Integer only";
     }
     if (values.height) {
-      temp.height = /^[0-9]+$/.test(values.height) ? "" : "Numbers only";
+      temp.height = /^[0-9]+$/.test(values.height) ? "" : "Integer only";
     }
     if (values.weight) {
-      temp.weight = /^[0-9]+$/.test(values.weight) ? "" : "Numbers only";
+      temp.weight = /^[0-9]+$/.test(values.weight) ? "" : "Integer only";
     }
     if (values.packageQty) {
       temp.packageQty = /^[0-9]+$/.test(values.packageQty)
         ? ""
-        : "Numbers only";
+        : "Integer only";
     }
     if (values.price) {
-      temp.price = /^[0-9]+$/.test(values.price) ? "" : "Numbers only";
+      temp.price = /^[0-9]+$/.test(values.price) ? "" : "Integer only";
     }
     if (values.priceRrp) {
-      temp.priceRrp = /^[0-9]+$/.test(values.priceRrp) ? "" : "Numbers only";
+      temp.priceRrp = /^[0-9]+$/.test(values.priceRrp) ? "" : "Integer only";
     }
     if (values.priceAgent) {
       temp.priceAgent = /^[0-9]+$/.test(values.priceAgent)
         ? ""
-        : "Numbers only";
+        : "Integer only";
     }
     if (values.priceShopify) {
       temp.priceShopify = /^[0-9]+$/.test(values.priceShopify)
         ? ""
-        : "Numbers only";
+        : "Integer only";
     }
     if (values.price1212) {
-      temp.price1212 = /^[0-9]+$/.test(values.price1212) ? "" : "Numbers only";
+      temp.price1212 = /^[0-9]+$/.test(values.price1212) ? "" : "Integer only";
     }
     if (values.priceSpecial) {
       temp.priceSpecial = /^[0-9]+$/.test(values.priceSpecial)
         ? ""
-        : "Numbers only";
+        : "Integer only";
     }
 
     setErrors({ ...temp });

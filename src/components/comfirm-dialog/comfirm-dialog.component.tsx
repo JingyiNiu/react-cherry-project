@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   dialog: {
     padding: theme.spacing(2),
     position: "absolute",
-    top: theme.spacing(5),
+    top: theme.spacing(8),
   },
   dialogTitle: {
     textAlign: "center",
@@ -26,10 +26,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   titleIcon: {
-    backgroundColor: theme.palette.secondary.light,
-    color: theme.palette.secondary.main,
+    backgroundColor: "#fcd8d4",
+    color: "#d54c4c",
     "&:hover": {
-      backgroundColor: theme.palette.secondary.light,
+      backgroundColor: "#fcd8d4",
       cursor: "default",
     },
     "& .MuiSvgIcon-root": {
@@ -43,23 +43,37 @@ const ComfirmDialog = (props) => {
   const classes = useStyles();
 
   return (
-    <Dialog open={confirmDialog.isOpen}>
+    <Dialog open={confirmDialog.isOpen} classes={{ paper: classes.dialog }}>
+      {/* Comfirm Dialog Title */}
       <DialogTitle className={classes.dialogTitle}>
         <IconButton disableRipple className={classes.titleIcon}>
           <NotListedLocationIcon />
         </IconButton>
       </DialogTitle>
+
+      {/* Comfirm Dialog Content */}
       <DialogContent className={classes.dialogContent}>
         <Typography variant='h6'>{confirmDialog.title}</Typography>
         <Typography variant='subtitle2'>{confirmDialog.subTitle}</Typography>
       </DialogContent>
+
+      {/* Comfirm Dialog Actions */}
       <DialogActions className={classes.dialogAction}>
+        {/* Yes */}
         <button
+          className='button btn-primary'
+          onClick={confirmDialog.onConfirm}
+        >
+          Yes
+        </button>
+
+        {/* No */}
+        <button
+          className='button btn-gray'
           onClick={() => setConfirmDialog({ ...confirmDialog, isOpen: false })}
         >
           No
         </button>
-        <button onClick={confirmDialog.onConfirm}>Yes</button>
       </DialogActions>
     </Dialog>
   );
