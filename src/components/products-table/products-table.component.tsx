@@ -4,7 +4,7 @@ import { Product } from "../../Interfaces/Product";
 import ProductsForm from "../products-form/products-form.component";
 import PopupDialog from "../popup-dialoge/popup-dialoge.component";
 import Notification from "../notification/notification.component";
-import ComfirmDialog from "../comfirm-dialog/comfirm-dialog.component";
+import ConfirmDialog from "../confirm-dialog/confirm-dialog.component";
 import { Input } from "../controls/Input";
 import ActionButton from "../controls/ActionButton";
 
@@ -385,10 +385,10 @@ const ProductsTable = () => {
       <Notification notify={notify} setNotify={setNotify} />
 
       {/* Confirm Dialog */}
-      <ComfirmDialog
+      <ConfirmDialog
         confirmDialog={confirmDialog}
         setConfirmDialog={setConfirmDialog}
-      ></ComfirmDialog>
+      />
     </div>
   );
 };

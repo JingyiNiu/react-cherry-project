@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ComfirmDialog = (props) => {
+const ConfirmDialog = (props) => {
   const { confirmDialog, setConfirmDialog } = props;
   const classes = useStyles();
 
@@ -79,4 +79,4 @@ const ComfirmDialog = (props) => {
   );
 };
 
-export default ComfirmDialog;
+export default ConfirmDialog;
