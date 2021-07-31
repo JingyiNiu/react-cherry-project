@@ -14,4 +14,6 @@ export interface Errors {
   length: string;
   weight: string;
   packageQty: string;
+  createdAt: string;
+  updatedAt: string;
 }

@@ -129,8 +129,10 @@ const ProductsForm = (props) => {
         length: parseInt(values.length),
         weight: parseInt(values.weight),
         packageQty: parseInt(values.packageQty),
+        createdAt: "",
+        updatedAt: "",
       };
-      if (data.productId == null) {
+      if (!data.productId) {
         axios.post(
           "http://206.189.39.185:5031/api/Product/ProductCreate",
           data

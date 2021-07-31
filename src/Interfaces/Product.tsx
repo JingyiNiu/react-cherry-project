@@ -15,4 +15,6 @@ export interface Product {
   length: number;
   weight: number;
   packageQty: number;
+  createdAt: string;
+  updatedAt: string;
 }

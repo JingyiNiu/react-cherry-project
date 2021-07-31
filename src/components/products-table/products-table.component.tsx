@@ -123,6 +123,12 @@ const ProductsTable = () => {
     { id: "price", numeric: true, label: "Price", disableSorting: false },
     { id: "weight", numeric: true, label: "Weight", disableSorting: false },
     { id: "size", numeric: true, label: "L × W × H", disableSorting: false },
+    {
+      id: "createdAt",
+      numeric: true,
+      label: "Created At",
+      disableSorting: false,
+    },
     { id: "actions", numeric: true, label: "Actions", disableSorting: true },
   ];
 
@@ -318,6 +324,9 @@ const ProductsTable = () => {
                   <StyledTableCell align='right'>{item.weight}</StyledTableCell>
                   <StyledTableCell align='right'>
                     {item.length} * {item.width} * {item.height}
+                  </StyledTableCell>
+                  <StyledTableCell align='right'>
+                    {item.createdAt.substring(0, 10)}
                   </StyledTableCell>
 
                   {/* Actions */}
