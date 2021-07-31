@@ -28,9 +28,6 @@ import {
   InputAdornment,
   Collapse,
   Box,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
 } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import EditIcon from "@material-ui/icons/Edit";
@@ -299,7 +296,7 @@ const ProductsTable = () => {
     let target = e.target;
     setFilterFunction({
       func: (products) => {
-        if (target.value == "") return products;
+        if (target.value === "") return products;
         else
           return products.filter((product) =>
             product.productName.toLowerCase().includes(target.value)
@@ -338,7 +335,6 @@ const ProductsTable = () => {
     subTitle: "",
   });
 
-  const [open, setOpen] = useState(false);
   // ******************* Return *******************
   return (
     <div>
@@ -407,6 +403,7 @@ const ProductsTable = () => {
           <TableBody>
             {productsAfterPagingAndSoring().map((item) => (
               <ProductRow
+                key={item.productId}
                 item={item}
                 openInPopup={openInPopup}
                 notify={notify}

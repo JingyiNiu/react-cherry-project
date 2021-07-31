@@ -36,10 +36,6 @@ import { Search } from "@material-ui/icons";
 import EditIcon from "@material-ui/icons/Edit";
 import CloseIcon from "@material-ui/icons/Close";
 
-import IconButton from "@material-ui/core/IconButton";
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-
 // ******************* Material-UI Table *******************
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
