@@ -86,109 +86,7 @@ const useStyles = makeStyles({
   },
 });
 
-// ################### Products Row ###################
-const ProductRow = (props) => {
-  const { item, openInPopup, setNotify } = props;
-  const [open, setOpen] = useState(false);
-  const [confirmDialog, setConfirmDialog] = useState<any>({
-    isOpen: false,
-    title: "",
-    subTitle: "",
-  });
-
-  const onDelete = (prodId) => {
-    setConfirmDialog({
-      ...confirmDialog,
-      isOpen: false,
-    });
-    axios.delete("http://206.189.39.185:5031/api/Product/" + prodId);
-    setNotify({
-      isOpen: true,
-      message: "Deleted Successfully",
-      type: "error",
-    });
-  };
-
-  return (
-    <>
-      <StyledTableRow
-        key={item.productId}
-        // className={classes.tableRow}
-      >
-        {/* Product Details */}
-        <StyledTableCell>
-          <IconButton
-            aria-label='expand'
-            size='small'
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </StyledTableCell>
-
-        <StyledTableCell>{item.productName}</StyledTableCell>
-        <StyledTableCell align='right'>{item.desciption}</StyledTableCell>
-        <StyledTableCell align='right'>{item.price}</StyledTableCell>
-        <StyledTableCell align='right'>{item.weight}</StyledTableCell>
-        <StyledTableCell align='right'>
-          {item.length} * {item.width} * {item.height}
-        </StyledTableCell>
-        <StyledTableCell align='right'>
-          {item.createdAt.substring(0, 10)}
-        </StyledTableCell>
-
-        {/* Actions */}
-        <StyledTableCell align='right'>
-          {/* Edit Button*/}
-          <ActionButton color='edit'>
-            <EditIcon
-              fontSize='small'
-              onClick={() => {
-                openInPopup(item);
-              }}
-            />
-          </ActionButton>
-
-          {/* Delete Button */}
-          <ActionButton color='delete'>
-            <CloseIcon
-              fontSize='small'
-              onClick={() => {
-                setConfirmDialog({
-                  isOpen: true,
-                  title: "Are you sure to delete this product?",
-                  subTitle: "You can't undo this operation",
-                  onConfirm: () => {
-                    onDelete(item.productId);
-                  },
-                });
-              }}
-            />
-          </ActionButton>
-        </StyledTableCell>
-        <StyledTableCell />
-      </StyledTableRow>
-      <StyledTableRow>
-        <StyledTableCell
-          style={{ paddingBottom: 0, paddingTop: 0 }}
-          colSpan={8}
-        >
-          <Collapse in={open} timeout='auto' unmountOnExit>
-            <Box margin={2}>{item.productName}</Box>
-          </Collapse>
-        </StyledTableCell>
-      </StyledTableRow>
-      {/* Confirm Dialog */}
-      <ConfirmDialog
-        confirmDialog={confirmDialog}
-        setConfirmDialog={setConfirmDialog}
-      />
-    </>
-  );
-};
-
-// ################### Products Table ###################
-const ProductsTable = () => {
+const ProductsTableCopy = () => {
   const classes = useStyles();
   const [products, setProducts] = useState<Product[]>([]);
 
@@ -331,6 +229,19 @@ const ProductsTable = () => {
     type: "",
   });
 
+  const onDelete = (prodId) => {
+    setConfirmDialog({
+      ...confirmDialog,
+      isOpen: false,
+    });
+    axios.delete("http://206.189.39.185:5031/api/Product/" + prodId);
+    setNotify({
+      isOpen: true,
+      message: "Deleted Successfully",
+      type: "error",
+    });
+  };
+
   // ******************* Confirm Dialog *******************
   const [confirmDialog, setConfirmDialog] = useState<any>({
     isOpen: false,
@@ -376,7 +287,7 @@ const ProductsTable = () => {
           <TableHead>
             <StyledTableRow>
               {/* Table Cell */}
-              <StyledTableCell />
+              {/* <StyledTableCell /> */}
               {headCells.map((headCell) => (
                 <StyledTableCell
                   key={headCell.id}
@@ -405,15 +316,95 @@ const ProductsTable = () => {
 
           {/* Table Body */}
           <TableBody>
-            {productsAfterPagingAndSoring().map((item) => (
-              <ProductRow
-                item={item}
-                openInPopup={openInPopup}
-                notify={notify}
-                setNotify={setNotify}
-                confirmDialog={confirmDialog}
-              />
-            ))}
+            {productsAfterPagingAndSoring().map((item) => {
+              return (
+                <>
+                  <Accordion>
+                    <AccordionSummary>
+                      <StyledTableRow
+                        key={item.productId}
+                        className={classes.tableRow}
+                      >
+                        {/* Product Details */}
+                        {/* <StyledTableCell>
+                      <IconButton
+                        aria-label='expand'
+                        size='small'
+                        onClick={() => setOpen(!open)}
+                      >
+                        {open ? (
+                          <KeyboardArrowUpIcon />
+                        ) : (
+                          <KeyboardArrowDownIcon />
+                        )}
+                      </IconButton>
+                    </StyledTableCell> */}
+
+                        <StyledTableCell>{item.productName}</StyledTableCell>
+                        <StyledTableCell align='right'>
+                          {item.desciption}
+                        </StyledTableCell>
+                        <StyledTableCell align='right'>
+                          {item.price}
+                        </StyledTableCell>
+                        <StyledTableCell align='right'>
+                          {item.weight}
+                        </StyledTableCell>
+                        <StyledTableCell align='right'>
+                          {item.length} * {item.width} * {item.height}
+                        </StyledTableCell>
+                        <StyledTableCell align='right'>
+                          {item.createdAt.substring(0, 10)}
+                        </StyledTableCell>
+
+                        {/* Actions */}
+                        <StyledTableCell align='right'>
+                          {/* Edit Button*/}
+                          <ActionButton color='edit'>
+                            <EditIcon
+                              fontSize='small'
+                              onClick={() => {
+                                openInPopup(item);
+                              }}
+                            />
+                          </ActionButton>
+
+                          {/* Delete Button */}
+                          <ActionButton color='delete'>
+                            <CloseIcon
+                              fontSize='small'
+                              onClick={() => {
+                                // onDelete(item.productId);
+                                setConfirmDialog({
+                                  isOpen: true,
+                                  title: "Are you sure to delete this product?",
+                                  subTitle: "You can't undo this operation",
+                                  onConfirm: () => {
+                                    onDelete(item.productId);
+                                  },
+                                });
+                              }}
+                            />
+                          </ActionButton>
+                        </StyledTableCell>
+                        <StyledTableCell />
+                      </StyledTableRow>
+                    </AccordionSummary>
+                    <AccordionDetails>{item.desciption}</AccordionDetails>
+                  </Accordion>
+                  {/* <StyledTableRow>
+                    <StyledTableCell
+                      style={{ paddingBottom: 0, paddingTop: 0 }}
+                      colSpan={8}
+                    >
+                      <Collapse in={open} timeout='auto' unmountOnExit>
+                        <Box margin={2}>{item.productName}</Box>
+                      </Collapse>
+                    </StyledTableCell>
+                  </StyledTableRow> */}
+                </>
+              );
+            })}
           </TableBody>
         </Table>
 
@@ -444,8 +435,14 @@ const ProductsTable = () => {
 
       {/* Notification */}
       <Notification notify={notify} setNotify={setNotify} />
+
+      {/* Confirm Dialog */}
+      <ConfirmDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+      />
     </div>
   );
 };
 
-export default ProductsTable;
+export default ProductsTableCopy;
