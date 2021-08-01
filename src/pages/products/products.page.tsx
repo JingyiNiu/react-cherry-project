@@ -1,6 +1,4 @@
-import ProductsTable from "../../components/products-table.component"; // arrow function product table
-
-import "./products.style.css";
+import ProductsTable from "../../components/products-table.component";
 
 const Products = () => {
   return (

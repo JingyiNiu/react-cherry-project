@@ -5,11 +5,10 @@ import Footer from "./components/footer/footer.component";
 
 import Home from "./pages/home/home.page";
 import Products from "./pages/products/products.page";
-import ProductsTableCopy from "./components/products-table-copy.component";
+import Orders from "./pages/orders/orders.page";
+
 import Register from "./pages/register/register.page";
 import Signin from "./pages/signin/signin.page";
-
-import CollapsibleTable from "./components/test";
 
 import "./App.css";
 
@@ -20,10 +19,9 @@ function App() {
       <Switch>
         <Route path='/' exact component={Home} />
         <Route path='/products' component={Products} />
-        <Route path='/copy' component={ProductsTableCopy} />
+        <Route path='/orders' component={Orders} />
         <Route path='/register' component={Register} />
         <Route path='/signin' component={Signin} />
-        <Route path='/test' component={CollapsibleTable} />
       </Switch>
       <Footer />
     </Router>
