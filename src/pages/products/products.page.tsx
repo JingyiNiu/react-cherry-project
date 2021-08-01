@@ -1,4 +1,4 @@
-import ProductsTable from "../../components/products-table/products-table.component"; // arrow function product table
+import ProductsTable from "../../components/products-table.component"; // arrow function product table
 
 import "./products.style.css";
 

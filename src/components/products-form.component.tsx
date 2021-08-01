@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
-import { Errors } from "../../Interfaces/Errors";
-import { Input } from "../controls/Input";
-import { Product } from "../../Interfaces/Product";
+import { Errors } from "../Interfaces/Errors";
+import { Input } from "./controls/Input";
+import { Product } from "../Interfaces/Product";
 
 import axios from "axios";
 
 import { makeStyles } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
-
-import "./products-form.style.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {

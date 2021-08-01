@@ -5,7 +5,7 @@ import Footer from "./components/footer/footer.component";
 
 import Home from "./pages/home/home.page";
 import Products from "./pages/products/products.page";
-import ProductsTableCopy from "./components/products-table-copy/products-table-copy.component";
+import ProductsTableCopy from "./components/products-table-copy.component";
 import Register from "./pages/register/register.page";
 import Signin from "./pages/signin/signin.page";
 
