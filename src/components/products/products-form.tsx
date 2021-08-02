@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Product } from "../Interfaces/Product";
-import { Input } from "./controls/Input";
-import { ProductError } from "../Interfaces/ProductError";
+import { Product } from "../../Interfaces/Product";
+import { Input } from "../controls/Input";
+import { ProductError } from "../../Interfaces/ProductError";
 
 import axios from "axios";
 

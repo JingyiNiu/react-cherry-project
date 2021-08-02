@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Product } from "../Interfaces/Product";
-import ProductsForm from "./products-form.component";
-import PopupDialog from "./popup-dialoge/popup-dialoge.component";
-import Notification from "./notification.component";
-import ConfirmDialog from "./confirm-dialog.component";
-import { Input } from "./controls/Input";
-import ActionButton from "./controls/ActionButton";
+import { Product } from "../../Interfaces/Product";
+import ProductsForm from "./products-form";
+import PopupDialog from "../popup-dialoge";
+import Notification from "../notification";
+import ConfirmDialog from "../confirm-dialog";
+import { Input } from "../controls/Input";
+import ActionButton from "../controls/ActionButton";
 
 import {
   withStyles,

@@ -1,4 +1,4 @@
-import ProductsTable from "../../components/products-table.component";
+import ProductsTable from "../../components/products/products";
 
 const Products = () => {
   return (

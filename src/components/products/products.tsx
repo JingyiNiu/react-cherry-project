@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Product } from "../Interfaces/Product";
+import { Product } from "../../Interfaces/Product";
 import ProductRow from "./product-row";
-import ProductsForm from "./products-form.component";
-import PopupDialog from "./popup-dialoge/popup-dialoge.component";
-import Notification from "./notification.component";
+import ProductsForm from "./products-form";
+import PopupDialog from "../popup-dialoge";
+import Notification from "../notification";
 
-import { Input } from "./controls/Input";
+import { Input } from "../controls/Input";
 
 import {
   withStyles,

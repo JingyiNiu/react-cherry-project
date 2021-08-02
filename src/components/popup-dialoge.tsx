@@ -5,7 +5,7 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import ActionButton from "../controls/ActionButton";
+import ActionButton from "./controls/ActionButton";
 import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles((theme) => ({

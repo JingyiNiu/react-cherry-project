@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
-import ConfirmDialog from "./confirm-dialog.component";
-import ActionButton from "./controls/ActionButton";
+import ConfirmDialog from "../confirm-dialog";
+import ActionButton from "../controls/ActionButton";
 
 import {
   withStyles,
