@@ -25,7 +25,7 @@ function TabPanel(props) {
   );
 }
 
-const Orders = () => {
+const OrdersPage = () => {
   const [value, setValue] = useState(2);
 
   const handleChange = (event: ChangeEvent<{}>, newValue: number) => {
@@ -58,4 +58,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default OrdersPage;

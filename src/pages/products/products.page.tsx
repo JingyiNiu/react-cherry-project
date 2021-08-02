@@ -1,12 +1,12 @@
-import ProductsTable from "../../components/products/products";
+import Products from "../../components/products/products";
 
-const Products = () => {
+const ProductsPage = () => {
   return (
     <div className='main-container'>
       <h1>Products</h1>
-      <ProductsTable />
+      <Products />
     </div>
   );
 };
 
-export default Products;
+export default ProductsPage;

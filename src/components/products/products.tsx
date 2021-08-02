@@ -68,7 +68,7 @@ const useStyles = makeStyles({
 });
 
 // ################### Products Table ###################
-const ProductsTable = () => {
+const Products = () => {
   const classes = useStyles();
   const [products, setProducts] = useState<Product[]>([]);
 
@@ -328,4 +328,4 @@ const ProductsTable = () => {
   );
 };
 
-export default ProductsTable;
+export default Products;
