@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Errors } from "../Interfaces/Errors";
-import { Input } from "./controls/Input";
 import { Product } from "../Interfaces/Product";
+import { Input } from "./controls/Input";
+import { ProductError } from "../Interfaces/ProductError";
 
 import axios from "axios";
 
@@ -45,7 +45,7 @@ const ProductsForm = (props) => {
   const classes = useStyles();
 
   const validate = () => {
-    let temp = {} as Errors;
+    let temp = {} as ProductError;
     temp.productName =
       values.productName.length !== 0 ? "" : "This field is required.";
     if (values.length) {

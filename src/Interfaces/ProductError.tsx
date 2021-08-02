@@ -1,4 +1,4 @@
-export interface Errors {
+export interface ProductError {
   productName: string;
   productCode: string;
   imageUrl: string;
