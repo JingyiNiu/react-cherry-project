@@ -37,6 +37,10 @@ const useStyles = makeStyles({
     padding: "5px",
     marginRight: "20px",
   },
+  boldText: {
+    fontWeight: 600,
+    marginRight: "10px",
+  },
 });
 
 // ################### Products Row ###################
@@ -79,20 +83,27 @@ const AllOrderRow = (props) => {
             <Box margin={2}>
               <h3>Order ID: {order.orderId}</h3>
 
-              <h4>User Details</h4>
+              {/* User Details */}
               <div className={classes.divContainer}>
                 <div className={classes.divCell}>
-                  User Name: {order.userName}
-                </div>
-                <div className={classes.divCell}>Email: {order.userEmail}</div>
-                <div className={classes.divCell}>
-                  First Name: {order.userFirstName}
+                  <span className={classes.boldText}>User Name</span>
+                  {order.userName}
                 </div>
                 <div className={classes.divCell}>
-                  Last Email: {order.userLastName}
+                  <span className={classes.boldText}>Email</span>
+                  {order.userEmail}
                 </div>
                 <div className={classes.divCell}>
-                  Company Name: {order.userCompanyName}
+                  <span className={classes.boldText}>First Name</span>
+                  {order.userFirstName}
+                </div>
+                <div className={classes.divCell}>
+                  <span className={classes.boldText}>Last Email</span>
+                  {order.userLastName}
+                </div>
+                <div className={classes.divCell}>
+                  <span className={classes.boldText}>Company Name</span>
+                  {order.userCompanyName}
                 </div>
               </div>
             </Box>

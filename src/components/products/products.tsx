@@ -212,7 +212,7 @@ const Products = () => {
   });
 
   // ******************* Confirm Dialog *******************
-  const [confirmDialog, setConfirmDialog] = useState<any>({
+  const [confirmDialog] = useState<any>({
     isOpen: false,
     title: "",
     subTitle: "",

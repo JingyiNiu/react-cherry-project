@@ -22,8 +22,6 @@ import {
   TableCell,
   TablePagination,
   TableSortLabel,
-  Toolbar,
-  InputAdornment,
 } from "@material-ui/core";
 
 // ******************* Material-UI Table *******************
@@ -172,24 +170,11 @@ const AllOrders = () => {
   }
 
   // ******************* Filter *******************
-  const [filterFunction, setFilterFunction] = useState({
+  const [filterFunction] = useState({
     func: (orders) => {
       return orders;
     },
   });
-
-  const handleSearch = (e) => {
-    let target = e.target;
-    setFilterFunction({
-      func: (orders) => {
-        if (target.value === "") return orders;
-        else
-          return orders.filter((order) =>
-            order.orderId.toLowerCase().includes(target.value)
-          );
-      },
-    });
-  };
 
   const ordersAfterPagingAndSoring = () => {
     return stableSort(
