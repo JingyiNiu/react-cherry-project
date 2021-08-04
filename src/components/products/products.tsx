@@ -108,7 +108,7 @@ const Products = () => {
     },
     { id: "price", numeric: true, label: "Price", disableSorting: false },
     { id: "weight", numeric: true, label: "Weight", disableSorting: false },
-    { id: "size", numeric: true, label: "L × W × H", disableSorting: false },
+    { id: "size", numeric: true, label: "L × W × H", disableSorting: true },
     {
       id: "createdAt",
       numeric: true,

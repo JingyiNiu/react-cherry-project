@@ -1,13 +1,14 @@
 import React from "react";
-import { useState, ChangeEvent } from "react";
+import { useState } from "react";
 
 import AllOrders from "../../components/orders/all-orders";
-import OrdersQuery from "../../components/orders/orders-query";
+import OrdersInquiry from "../../components/orders/orders-inquiry";
 
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
+import { makeStyles } from "@material-ui/core";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -26,9 +27,9 @@ function TabPanel(props) {
 }
 
 const OrdersPage = () => {
-  const [value, setValue] = useState(2);
+  const [value, setValue] = useState(0);
 
-  const handleChange = (event: ChangeEvent<{}>, newValue: number) => {
+  const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
@@ -42,17 +43,16 @@ const OrdersPage = () => {
           indicatorColor='secondary'
           textColor='secondary'
           onChange={handleChange}
-          aria-label='disabled tabs example'
         >
-          <Tab label='全部订单' />
-          <Tab label='订单查询' />
+          <Tab label='All Orders' />
+          <Tab label='Order Inquiry' />
         </Tabs>
       </Paper>
       <TabPanel value={value} index={0}>
         <AllOrders />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <OrdersQuery />
+        <OrdersInquiry />
       </TabPanel>
     </div>
   );
