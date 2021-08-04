@@ -96,8 +96,8 @@ const Products = () => {
   const headCells: HeadCell[] = [
     {
       id: "productName",
-      numeric: false,
       label: "Product Name",
+      numeric: false,
       disableSorting: false,
     },
     {
