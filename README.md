@@ -1,5 +1,5 @@
 # React Cherry Project
-This is an ongoing react project demo for a cherry company
+This is an ongoing react project
 
 ## Create TypeScript React App
 https://create-react-app.dev/docs/getting-started/   
