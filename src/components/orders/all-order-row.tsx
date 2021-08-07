@@ -52,6 +52,7 @@ const AllOrderRow = (props) => {
   return (
     <>
       {/* Product Row */}
+
       <TableRow key={order.orderId} className={classes.tableRow}>
         <StyledTableCell>
           <IconButton
@@ -81,30 +82,55 @@ const AllOrderRow = (props) => {
         >
           <Collapse in={open} timeout='auto' unmountOnExit>
             <Box margin={2}>
-              <h3>Order ID: {order.orderId}</h3>
-
-              {/* User Details */}
-              <div className={classes.divContainer}>
-                <div className={classes.divCell}>
-                  <span className={classes.boldText}>User Name</span>
-                  {order.userName}
-                </div>
-                <div className={classes.divCell}>
-                  <span className={classes.boldText}>Email</span>
-                  {order.userEmail}
-                </div>
-                <div className={classes.divCell}>
-                  <span className={classes.boldText}>First Name</span>
-                  {order.userFirstName}
-                </div>
-                <div className={classes.divCell}>
-                  <span className={classes.boldText}>Last Email</span>
-                  {order.userLastName}
-                </div>
-                <div className={classes.divCell}>
-                  <span className={classes.boldText}>Company Name</span>
-                  {order.userCompanyName}
-                </div>
+              Order ID: {order.orderId}
+              <div className='order-table'>
+                <table>
+                  <tr>
+                    <th colSpan={6}>Product Details</th>
+                  </tr>
+                  <tr>
+                    <th>product Id</th>
+                    <td>{order.productId}</td>
+                    <th>product Name</th>
+                    <td>{order.productName}</td>
+                    <th>product Code</th>
+                    <td>{order.productCode}</td>
+                  </tr>
+                  <tr>
+                    <th>Weight</th>
+                    <td>{order.weight}</td>
+                    <th>Size</th>
+                    <td>
+                      {order.width} * {order.height} * {order.length}
+                    </td>
+                    <th>price</th>
+                    <td>{order.price}</td>
+                  </tr>
+                  <tr>
+                    <th colSpan={6}>Recipient Details</th>
+                  </tr>
+                  <tr>
+                    <th>Recipient</th>
+                    <td>{order.recipient}</td>
+                    <th>Phone Number</th>
+                    <td colSpan={3}>{order.recipientNumber}</td>
+                  </tr>
+                  <tr>
+                    <th>Country</th>
+                    <td>{order.recipientCountry}</td>
+                    <th>Provience</th>
+                    <td>{order.recipientProvience}</td>
+                    <th>City</th>
+                    <td>{order.recipientCity}</td>
+                  </tr>
+                  <tr>
+                    <th>Address</th>
+                    <td colSpan={5}>{order.recipientAddr}</td>
+                  </tr>
+                  <tr>
+                    <th colSpan={6}>Sender Details</th>
+                  </tr>
+                </table>
               </div>
             </Box>
           </Collapse>
