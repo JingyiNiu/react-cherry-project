@@ -311,7 +311,7 @@ const Products = () => {
 
       {/* Popup Dialog */}
       <PopupDialog
-        title='Add New Product'
+        title='Add or Edit Product'
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
       >
