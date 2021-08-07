@@ -6,7 +6,6 @@
 
 .main-container {
   padding: 0 20px 100px;
-  border: 1px dashed #999;
 }
 
 input::-webkit-input-placeholder {
@@ -19,9 +18,9 @@ input::-webkit-input-placeholder {
   display: flex;
   justify-content: center;
 }
+
 .button {
   display: block;
-
   margin-right: 10px;
   border: none;
   padding: 10px 30px;

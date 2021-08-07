@@ -229,6 +229,8 @@ const AllOrders = () => {
 
   const handleFilterByDate = (e) => {
     e.preventDefault();
+    console.log(startDate);
+    console.log(endDate);
     setFilterFunction({
       func: (orders) => {
         return orders.filter(
