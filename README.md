@@ -20,3 +20,6 @@ npm install @material-ui/icons
 ## Axios
 https://axios-http.com/docs/intro   
 `npm install axios`
+
+## Screenshots
+<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/orders.png" width=600>   
