@@ -241,6 +241,11 @@ const AllOrders = () => {
     });
   };
 
+  const reset = () => {
+    console.log("reset is clicked");
+    getAllOrders();
+  };
+
   // ******************* Filter *******************
   const ordersAfterPagingAndSoring = () => {
     return stableSort(
@@ -291,8 +296,12 @@ const AllOrders = () => {
               shrink: true,
             }}
           />
+
           <button className='button btn-primary' type='submit'>
             Filter By Date Range
+          </button>
+          <button className='button btn-gray' onClick={reset}>
+            Reset
           </button>
         </form>
       </Toolbar>
