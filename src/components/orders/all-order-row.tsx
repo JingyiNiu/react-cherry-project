@@ -82,20 +82,22 @@ const AllOrderRow = (props) => {
         >
           <Collapse in={open} timeout='auto' unmountOnExit>
             <Box margin={2}>
-              Order ID: {order.orderId}
+              <h3>Order ID: {order.orderId}</h3>
+
               <div className='order-table'>
                 <table>
                   <tr>
-                    <th colSpan={6}>Product Details</th>
+                    <th colSpan={6}>Order Details</th>
                   </tr>
                   <tr>
                     <th>product Id</th>
                     <td>{order.productId}</td>
-                    <th>product Name</th>
-                    <td>{order.productName}</td>
                     <th>product Code</th>
                     <td>{order.productCode}</td>
+                    <th>product Name</th>
+                    <td>{order.productName}</td>
                   </tr>
+
                   <tr>
                     <th>Weight</th>
                     <td>{order.weight}</td>
@@ -107,28 +109,48 @@ const AllOrderRow = (props) => {
                     <td>{order.price}</td>
                   </tr>
                   <tr>
+                    <th>track No.</th>
+                    <td>{order.trackNo}</td>
+                    <th>Status</th>
+                    <td>{order.status}</td>
+                    <th>cin7Id</th>
+                    <td>{order.cin7Id}</td>
+                  </tr>
+                  <tr>
                     <th colSpan={6}>Recipient Details</th>
                   </tr>
                   <tr>
                     <th>Recipient</th>
                     <td>{order.recipient}</td>
                     <th>Phone Number</th>
-                    <td colSpan={3}>{order.recipientNumber}</td>
-                  </tr>
-                  <tr>
+                    <td>{order.recipientNumber}</td>
                     <th>Country</th>
                     <td>{order.recipientCountry}</td>
+                  </tr>
+                  <tr>
                     <th>Provience</th>
                     <td>{order.recipientProvience}</td>
                     <th>City</th>
                     <td>{order.recipientCity}</td>
-                  </tr>
-                  <tr>
                     <th>Address</th>
-                    <td colSpan={5}>{order.recipientAddr}</td>
+                    <td>{order.recipientAddr}</td>
                   </tr>
                   <tr>
                     <th colSpan={6}>Sender Details</th>
+                  </tr>
+                  <tr>
+                    <th>Sender</th>
+                    <td>{order.senderName}</td>
+                    <th>Phone Number</th>
+                    <td>{order.senderNumber}</td>
+                  </tr>
+                  <tr>
+                    <th>Country</th>
+                    <td>{order.senderCountry}</td>
+                    <th>City</th>
+                    <td>{order.senderCity}</td>
+                    <th>Address</th>
+                    <td>{order.senderAddr}</td>
                   </tr>
                 </table>
               </div>
