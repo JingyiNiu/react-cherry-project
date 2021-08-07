@@ -27,6 +27,7 @@ import {
 } from "@material-ui/core";
 
 import { Search } from "@material-ui/icons";
+import TextField from "@material-ui/core/TextField";
 
 // ******************* Material-UI Table *******************
 const StyledTableCell = withStyles((theme: Theme) =>
@@ -55,10 +56,23 @@ const useStyles = makeStyles({
     },
   },
   searchInput: {
-    width: "20%",
+    width: "200px",
+    margin: "10px 0",
   },
   toolbar: {
     marginBottom: "20px",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+  container: {
+    display: "flex",
+    flexWrap: "wrap",
+    margin: "10px 0",
+  },
+  textField: {
+    margin: "0 10px",
+    width: 200,
   },
 });
 
@@ -179,7 +193,7 @@ const AllOrders = () => {
     return 0;
   }
 
-  // ******************* Filter *******************
+  // ******************* Search *******************
   const [filterFunction, setFilterFunction] = useState({
     func: (orders) => {
       return orders;
@@ -199,6 +213,34 @@ const AllOrders = () => {
     });
   };
 
+  // ******************* Date *******************
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+
+  const handelStartDateChange = (e) => {
+    const { value } = e.target;
+    console.log("value", value);
+    setStartDate(value);
+  };
+
+  const handelEndDateChange = (e) => {
+    const { value } = e.target;
+    console.log("value", value);
+    setEndDate(value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("startDate", startDate);
+    console.log("endDate", endDate);
+  };
+
+  const resetDate = () => {
+    setStartDate("");
+    setEndDate("");
+  };
+
+  // ******************* Filter *******************
   const ordersAfterPagingAndSoring = () => {
     return stableSort(
       filterFunction.func(orders),
@@ -210,7 +252,6 @@ const AllOrders = () => {
   return (
     <div>
       <h2>All Orders</h2>
-
       {/* Top Bar */}
       <Toolbar className={classes.toolbar}>
         {/* Search Bar */}
@@ -226,6 +267,38 @@ const AllOrders = () => {
             ),
           }}
         />
+
+        {/* Date */}
+        <form className={classes.container} onSubmit={handleSubmit}>
+          <TextField
+            id='startDate'
+            label='Start Date'
+            type='date'
+            defaultValue='2020-01-01'
+            className={classes.textField}
+            onChange={handelStartDateChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            id='endDate'
+            label='End Date'
+            type='date'
+            defaultValue='2021-12-31'
+            className={classes.textField}
+            onChange={handelEndDateChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <button className='button btn-primary' type='submit'>
+            Filter By Date Range
+          </button>
+          <button className='button btn-gray' onClick={resetDate}>
+            Reset
+          </button>
+        </form>
       </Toolbar>
       {/* Table */}
       <TableContainer component={Paper}>
