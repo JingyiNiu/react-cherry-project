@@ -22,4 +22,8 @@ https://axios-http.com/docs/intro
 `npm install axios`
 
 ## Screenshots
+Orders:   
 <img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/orders.png" width=600>   
+
+Products:   
+<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products.png" width=600>  
