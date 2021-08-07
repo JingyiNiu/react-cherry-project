@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import AllOrderRow from "./all-order-row";
-
+import { Input } from "../controls/Input";
 import { AllOrder } from "../../Interfaces/AllOrder";
 
 import axios from "axios";
@@ -22,7 +22,11 @@ import {
   TableCell,
   TablePagination,
   TableSortLabel,
+  Toolbar,
+  InputAdornment,
 } from "@material-ui/core";
+
+import { Search } from "@material-ui/icons";
 
 // ******************* Material-UI Table *******************
 const StyledTableCell = withStyles((theme: Theme) =>
@@ -49,6 +53,12 @@ const useStyles = makeStyles({
     "&:hover": {
       backgroundColor: "#fffbf6",
     },
+  },
+  searchInput: {
+    width: "20%",
+  },
+  toolbar: {
+    marginBottom: "20px",
   },
 });
 
@@ -170,11 +180,24 @@ const AllOrders = () => {
   }
 
   // ******************* Filter *******************
-  const [filterFunction] = useState({
+  const [filterFunction, setFilterFunction] = useState({
     func: (orders) => {
       return orders;
     },
   });
+
+  const handleSearchById = (e) => {
+    let target = e.target;
+    setFilterFunction({
+      func: (orders) => {
+        if (target.value === "") return orders;
+        else
+          return orders.filter((order) =>
+            order.orderId.toString().includes(target.value)
+          );
+      },
+    });
+  };
 
   const ordersAfterPagingAndSoring = () => {
     return stableSort(
@@ -188,6 +211,22 @@ const AllOrders = () => {
     <div>
       <h2>All Orders</h2>
 
+      {/* Top Bar */}
+      <Toolbar className={classes.toolbar}>
+        {/* Search Bar */}
+        <Input
+          label='Search by order ID'
+          className={classes.searchInput}
+          onChange={handleSearchById}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position='start'>
+                <Search />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Toolbar>
       {/* Table */}
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label='collapsible table'>
