@@ -219,25 +219,26 @@ const AllOrders = () => {
 
   const handelStartDateChange = (e) => {
     const { value } = e.target;
-    console.log("value", value);
     setStartDate(value);
   };
 
   const handelEndDateChange = (e) => {
     const { value } = e.target;
-    console.log("value", value);
     setEndDate(value);
   };
 
-  const handleSubmit = (e) => {
+  const handleFilterByDate = (e) => {
     e.preventDefault();
-    console.log("startDate", startDate);
-    console.log("endDate", endDate);
-  };
-
-  const resetDate = () => {
-    setStartDate("");
-    setEndDate("");
+    setFilterFunction({
+      func: (orders) => {
+        return orders.filter(
+          (order) =>
+            new Date(order.createdAt).getTime() >
+              new Date(startDate).getTime() &&
+            new Date(order.createdAt).getTime() < new Date(endDate).getTime()
+        );
+      },
+    });
   };
 
   // ******************* Filter *******************
@@ -269,12 +270,11 @@ const AllOrders = () => {
         />
 
         {/* Date */}
-        <form className={classes.container} onSubmit={handleSubmit}>
+        <form className={classes.container} onSubmit={handleFilterByDate}>
           <TextField
             id='startDate'
             label='Start Date'
             type='date'
-            defaultValue='2020-01-01'
             className={classes.textField}
             onChange={handelStartDateChange}
             InputLabelProps={{
@@ -285,7 +285,6 @@ const AllOrders = () => {
             id='endDate'
             label='End Date'
             type='date'
-            defaultValue='2021-12-31'
             className={classes.textField}
             onChange={handelEndDateChange}
             InputLabelProps={{
@@ -295,11 +294,9 @@ const AllOrders = () => {
           <button className='button btn-primary' type='submit'>
             Filter By Date Range
           </button>
-          <button className='button btn-gray' onClick={resetDate}>
-            Reset
-          </button>
         </form>
       </Toolbar>
+
       {/* Table */}
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label='collapsible table'>
@@ -348,7 +345,12 @@ const AllOrders = () => {
           page={page}
           rowsPerPageOptions={pages}
           rowsPerPage={rowsPerPage}
-          count={orders.length}
+          count={
+            stableSort(
+              filterFunction.func(orders),
+              getComparator(order, orderBy)
+            ).length
+          }
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
