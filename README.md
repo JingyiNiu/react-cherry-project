@@ -28,3 +28,5 @@ Products:
 Orders:   
 <img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/orders.png" width=600>   
 
+Form:   
+<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products-form.png" width=600>   
