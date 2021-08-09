@@ -1,4 +1,5 @@
 .navbar {
+  font-family: "Poppins";
   display: flex;
   justify-content: space-between;
   background-color: var(--primary-color);

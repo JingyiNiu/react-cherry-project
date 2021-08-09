@@ -1,10 +1,10 @@
 import React from "react";
 import { Snackbar, makeStyles } from "@material-ui/core";
-import Alert from "@material-ui/lab/Alert";
+import { Alert } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    top: theme.spacing(9),
+    top: theme.spacing(10),
   },
 }));
 
@@ -27,7 +27,7 @@ const Notification = (props) => {
       className={classes.root}
       open={notify.isOpen}
       autoHideDuration={1500}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
       onClose={handleClose}
     >
       <Alert
