@@ -1,13 +1,10 @@
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import PersonIcon from "@material-ui/icons/Person";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+
 import { Input } from "../controls/Input";
 
 const useStyles = makeStyles((theme) => ({
@@ -21,17 +18,16 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   avatar: {
-    margin: theme.spacing(1),
     width: theme.spacing(7),
     height: theme.spacing(7),
     backgroundColor: "#d54c4c",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(1, 0, 2),
   },
 }));
 
@@ -42,73 +38,64 @@ const RegisterForm = () => {
     <Container component='main' maxWidth='xs'>
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <PersonIcon fontSize='large' />
+          <PersonAddIcon fontSize='large' />
         </Avatar>
+
+        {/* Register Form */}
         <h2>Register</h2>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
+            {/* Username */}
+            <Grid item xs={12}>
+              <Input label='Username *' fullWidth />
+            </Grid>
+
+            {/* Password */}
+            <Grid item xs={12}>
+              <Input label='Password *' fullWidth />
+            </Grid>
+
+            {/* Type */}
+            <Grid item xs={12}>
+              <Input label='Type *' fullWidth />
+            </Grid>
+
+            {/* Discount Rate */}
+            <Grid item xs={12}>
+              <Input label='Discount Rate *' fullWidth />
+            </Grid>
+
+            {/* Full Name */}
             <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete='fname'
-                name='firstName'
-                variant='outlined'
-                required
-                fullWidth
-                id='firstName'
-                label='First Name'
-                autoFocus
-              />
+              <Input label='First Name' />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                id='lastName'
-                label='Last Name'
-                name='lastName'
-                autoComplete='lname'
-              />
+              <Input label='Last Name' />
             </Grid>
+
+            {/* Email */}
             <Grid item xs={12}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                id='email'
-                label='Email Address'
-                name='email'
-                autoComplete='email'
-              />
+              <Input label='Email' fullWidth />
             </Grid>
+
+            {/* Phone Number */}
             <Grid item xs={12}>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                name='password'
-                label='Password'
-                type='password'
-                id='password'
-                autoComplete='current-password'
-              />
+              <Input label='Phone Number' fullWidth />
             </Grid>
+
+            {/* Company Name */}
             <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value='allowExtraEmails' color='primary' />}
-                label='I want to receive inspiration, marketing promotions and updates via email.'
-              />
+              <Input label='Company Name' fullWidth />
+            </Grid>
+
+            {/* Submit Button */}
+            <Grid item xs={12} className={classes.submit}>
+              <button className='button btn-primary button-full' type='submit'>
+                Create a new account
+              </button>
             </Grid>
           </Grid>
-          <Button
-            type='submit'
-            fullWidth
-            variant='contained'
-            color='primary'
-            className={classes.submit}
-          >
-            Register
-          </Button>
+
           <Grid container justifyContent='flex-end'>
             <Grid item>
               <Link href='#' variant='body2'>

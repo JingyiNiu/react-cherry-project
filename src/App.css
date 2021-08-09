@@ -32,6 +32,10 @@ input::-webkit-input-placeholder {
   font-family: inherit;
 }
 
+.button-full {
+  width: 100%;
+}
+
 .btn-primary {
   color: #fff;
   background-color: var(--primary-color);
