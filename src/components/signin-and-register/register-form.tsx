@@ -130,7 +130,7 @@ const RegisterForm = () => {
             {/* Submit Button */}
             <Grid item xs={12} className={classes.submit}>
               <button className='button btn-primary button-full' type='submit'>
-                Create a new account
+                Create A New Account
               </button>
             </Grid>
           </Grid>
