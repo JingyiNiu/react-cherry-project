@@ -28,7 +28,6 @@ import {
   InputAdornment,
 } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 // ******************* Material-UI Table *******************
 const StyledTableCell = withStyles((theme: Theme) =>
