@@ -229,23 +229,26 @@ const AllOrders = () => {
 
   const handleFilterByDate = (e) => {
     e.preventDefault();
-    console.log(startDate);
-    console.log(endDate);
     setFilterFunction({
       func: (orders) => {
-        return orders.filter(
-          (order) =>
-            new Date(order.createdAt).getTime() >
-              new Date(startDate).getTime() &&
-            new Date(order.createdAt).getTime() < new Date(endDate).getTime()
-        );
+        return orders.filter((order) => {
+          const start = new Date(startDate).getTime();
+          const end = new Date(endDate).getTime();
+          const now = new Date(order.createdAt).getTime();
+          if (endDate.length > 0 && startDate.length > 0) {
+            return now > start && now < end;
+          } else if (endDate.length === 0 && startDate.length > 0) {
+            return now > start;
+          } else if (endDate.length > 0 && startDate.length === 0) {
+            return now < end;
+          }
+        });
       },
     });
   };
 
   const reset = () => {
     console.log("reset is clicked");
-    getAllOrders();
   };
 
   // ******************* Filter *******************
