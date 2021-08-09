@@ -4,6 +4,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+
 import { Input } from "../controls/Input";
 import { Link } from "react-router-dom";
 
@@ -33,6 +39,13 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "black",
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
 }));
 
 const RegisterForm = () => {
@@ -59,15 +72,37 @@ const RegisterForm = () => {
               <Input label='Password *' fullWidth />
             </Grid>
 
-            {/* Type */}
-            <Grid item xs={12}>
-              <Input label='Type *' fullWidth />
-            </Grid>
+            {/* User Type */}
+            <FormControl
+              variant='outlined'
+              className={classes.formControl}
+              fullWidth
+            >
+              <InputLabel id='user-type'>User Type *</InputLabel>
+              <Select labelId='user-type' label='User Type * '>
+                <MenuItem value={0}>0</MenuItem>
+                <MenuItem value={1}>1</MenuItem>
+                <MenuItem value={2}>2</MenuItem>
+                <MenuItem value={3}>3</MenuItem>
+                <MenuItem value={4}>4</MenuItem>
+              </Select>
+            </FormControl>
 
             {/* Discount Rate */}
-            <Grid item xs={12}>
-              <Input label='Discount Rate *' fullWidth />
-            </Grid>
+            <FormControl
+              variant='outlined'
+              className={classes.formControl}
+              fullWidth
+            >
+              <InputLabel id='discount-rate'>Discount Rate *</InputLabel>
+              <Select labelId='discount-rate' label='Discount Rate * '>
+                <MenuItem value={1}>1</MenuItem>
+                <MenuItem value={2}>2</MenuItem>
+                <MenuItem value={3}>3</MenuItem>
+                <MenuItem value={4}>4</MenuItem>
+                <MenuItem value={5}>5</MenuItem>
+              </Select>
+            </FormControl>
 
             {/* Full Name */}
             <Grid item xs={12} sm={6}>
