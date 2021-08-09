@@ -29,6 +29,10 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(1, 0, 2),
   },
+  link: {
+    textDecoration: "none",
+    color: "black",
+  },
 }));
 
 const RegisterForm = () => {
@@ -98,7 +102,9 @@ const RegisterForm = () => {
 
           <Grid container justifyContent='flex-end'>
             <Grid item>
-              <Link to='/signin'>Already have an account? Sign in</Link>
+              <Link to='/signin' className={classes.link}>
+                Already have an account? Sign in
+              </Link>
             </Grid>
           </Grid>
         </form>
