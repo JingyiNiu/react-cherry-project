@@ -48,7 +48,7 @@ const SigninForm = () => {
         </Avatar>
 
         {/* Signin Form */}
-        <h2>Signin</h2>
+        <h2>Sign In</h2>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
             {/* Username */}
