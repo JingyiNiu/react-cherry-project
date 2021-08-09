@@ -30,3 +30,6 @@ Orders:
 
 Form:   
 <img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products-form.png" width=600>   
+
+Confirm Dialog:   
+<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products-comfirm-dialog.png" width=600>   
