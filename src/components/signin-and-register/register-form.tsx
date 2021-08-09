@@ -1,11 +1,11 @@
 import Avatar from "@material-ui/core/Avatar";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
 import { Input } from "../controls/Input";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -98,9 +98,7 @@ const RegisterForm = () => {
 
           <Grid container justifyContent='flex-end'>
             <Grid item>
-              <Link href='#' variant='body2'>
-                Already have an account? Sign in
-              </Link>
+              <Link to='/signin'>Already have an account? Sign in</Link>
             </Grid>
           </Grid>
         </form>
