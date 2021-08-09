@@ -91,18 +91,6 @@ const AllOrders = () => {
     getAllOrders();
   }, [orders]);
 
-  // const getAllOrders = () => {
-  //   const ordersList: AllOrder[] = [];
-  //   const url =
-  //     "http://206.189.39.185:5031/api/Order/GetOrderList/userId/status?status=9";
-  //   axios.get(url).then((response) => {
-  //     response.data.data.forEach((item: any) => {
-  //       ordersList.push(item);
-  //     });
-  //     setOrders(ordersList);
-  //   });
-  // };
-
   const getAllOrders = async () => {
     try {
       const url =
@@ -332,6 +320,7 @@ const AllOrders = () => {
         </form>
       </Toolbar>
 
+      {/* Table */}
       {loading ? (
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label='collapsible table'>
@@ -395,8 +384,6 @@ const AllOrders = () => {
           <CircularProgress color='secondary' />
         </div>
       )}
-
-      {/* Table */}
     </div>
   );
 };

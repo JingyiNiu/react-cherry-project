@@ -28,6 +28,7 @@ import {
   InputAdornment,
 } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 // ******************* Material-UI Table *******************
 const StyledTableCell = withStyles((theme: Theme) =>
@@ -76,15 +77,15 @@ const Products = () => {
     getProducts();
   }, [products]);
 
-  const getProducts = () => {
-    const productsList: Product[] = [];
-    const url = "http://206.189.39.185:5031/api/Product";
-    axios.get(url).then((response) => {
-      response.data.data.forEach((item: any) => {
-        productsList.push(item);
+  const getProducts = async () => {
+    try {
+      const url = "http://206.189.39.185:5031/api/Product";
+      const apiCall = await axios.get(url).then((res) => {
+        setProducts(res.data.data);
       });
-      setProducts(productsList);
-    });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   interface HeadCell {
