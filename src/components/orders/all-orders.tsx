@@ -247,8 +247,10 @@ const AllOrders = () => {
     });
   };
 
-  const reset = () => {
+  const resetButton = () => {
     console.log("reset is clicked");
+    // ordersAfterPagingAndSoring();
+    // setFilterFunction({ func: (orders) => orders });
   };
 
   // ******************* Filter *******************
@@ -280,7 +282,7 @@ const AllOrders = () => {
         />
 
         {/* Date */}
-        <form className={classes.container} onSubmit={handleFilterByDate}>
+        <form className={classes.container}>
           <TextField
             id='startDate'
             label='Start Date'
@@ -302,10 +304,10 @@ const AllOrders = () => {
             }}
           />
 
-          <button className='button btn-primary' type='submit'>
+          <button className='button btn-primary' onClick={handleFilterByDate}>
             Filter By Date Range
           </button>
-          <button className='button btn-gray' onClick={reset}>
+          <button className='button btn-gray' onClick={resetButton}>
             Reset
           </button>
         </form>
