@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import AllOrderRow from "./all-order-row";
 import { Input } from "../controls/Input";
-import { AllOrder } from "../../Interfaces/AllOrder";
 
 import axios from "axios";
 
@@ -28,6 +27,7 @@ import {
 
 import { Search } from "@material-ui/icons";
 import TextField from "@material-ui/core/TextField";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 // ******************* Material-UI Table *******************
 const StyledTableCell = withStyles((theme: Theme) =>
@@ -74,27 +74,46 @@ const useStyles = makeStyles({
     margin: "0 10px",
     width: 200,
   },
+  spinnerContainer: {
+    width: "100%",
+    padding: "100px 0",
+    textAlign: "center",
+  },
 });
 
 // ################### All Orders ###################
 const AllOrders = () => {
   const classes = useStyles();
   const [orders, setOrders] = useState<any>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getAllOrders();
   }, [orders]);
 
-  const getAllOrders = () => {
-    const ordersList: AllOrder[] = [];
-    const url =
-      "http://206.189.39.185:5031/api/Order/GetOrderList/userId/status?status=9";
-    axios.get(url).then((response) => {
-      response.data.data.forEach((item: any) => {
-        ordersList.push(item);
+  // const getAllOrders = () => {
+  //   const ordersList: AllOrder[] = [];
+  //   const url =
+  //     "http://206.189.39.185:5031/api/Order/GetOrderList/userId/status?status=9";
+  //   axios.get(url).then((response) => {
+  //     response.data.data.forEach((item: any) => {
+  //       ordersList.push(item);
+  //     });
+  //     setOrders(ordersList);
+  //   });
+  // };
+
+  const getAllOrders = async () => {
+    try {
+      const url =
+        "http://206.189.39.185:5031/api/Order/GetOrderList/userId/status?status=9";
+      const apiCall = await axios.get(url).then((res) => {
+        setOrders(res.data.data);
+        setLoading(true);
       });
-      setOrders(ordersList);
-    });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   interface HeadCell {
@@ -313,64 +332,71 @@ const AllOrders = () => {
         </form>
       </Toolbar>
 
-      {/* Table */}
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label='collapsible table'>
-          {/* Table Head */}
-          <TableHead>
-            <TableRow>
-              {/* Table Cell */}
-              <StyledTableCell />
-              {headCells.map((headCell) => (
-                <StyledTableCell
-                  key={headCell.id}
-                  align={headCell.numeric ? "left" : "right"}
-                  sortDirection={orderBy === headCell.id ? order : false}
-                >
-                  {/* Table Sort Label */}
-                  {headCell.disableSorting ? (
-                    headCell.label
-                  ) : (
-                    <TableSortLabel
-                      active={orderBy === headCell.id}
-                      direction={orderBy === headCell.id ? order : "asc"}
-                      onClick={() => {
-                        handleSortRequest(headCell.id);
-                      }}
-                    >
-                      {headCell.label}
-                    </TableSortLabel>
-                  )}
-                </StyledTableCell>
+      {loading ? (
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label='collapsible table'>
+            {/* Table Head */}
+            <TableHead>
+              <TableRow>
+                {/* Table Cell */}
+                <StyledTableCell />
+                {headCells.map((headCell) => (
+                  <StyledTableCell
+                    key={headCell.id}
+                    align={headCell.numeric ? "left" : "right"}
+                    sortDirection={orderBy === headCell.id ? order : false}
+                  >
+                    {/* Table Sort Label */}
+                    {headCell.disableSorting ? (
+                      headCell.label
+                    ) : (
+                      <TableSortLabel
+                        active={orderBy === headCell.id}
+                        direction={orderBy === headCell.id ? order : "asc"}
+                        onClick={() => {
+                          handleSortRequest(headCell.id);
+                        }}
+                      >
+                        {headCell.label}
+                      </TableSortLabel>
+                    )}
+                  </StyledTableCell>
+                ))}
+                <StyledTableCell />
+              </TableRow>
+            </TableHead>
+
+            {/* Table Body */}
+            <TableBody>
+              {ordersAfterPagingAndSoring().map((order) => (
+                <AllOrderRow key={order.orderId} order={order} />
               ))}
-              <StyledTableCell />
-            </TableRow>
-          </TableHead>
+            </TableBody>
+          </Table>
 
-          {/* Table Body */}
-          <TableBody>
-            {ordersAfterPagingAndSoring().map((order) => (
-              <AllOrderRow key={order.orderId} order={order} />
-            ))}
-          </TableBody>
-        </Table>
+          {/* Table Pagination */}
+          <TablePagination
+            component='div'
+            page={page}
+            rowsPerPageOptions={pages}
+            rowsPerPage={rowsPerPage}
+            count={
+              stableSort(
+                filterFunction.func(orders),
+                getComparator(order, orderBy)
+              ).length
+            }
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </TableContainer>
+      ) : (
+        <div className={classes.spinnerContainer}>
+          <CircularProgress color='secondary' />
+        </div>
+      )}
 
-        {/* Table Pagination */}
-        <TablePagination
-          component='div'
-          page={page}
-          rowsPerPageOptions={pages}
-          rowsPerPage={rowsPerPage}
-          count={
-            stableSort(
-              filterFunction.func(orders),
-              getComparator(order, orderBy)
-            ).length
-          }
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </TableContainer>
+      {/* Table */}
     </div>
   );
 };
