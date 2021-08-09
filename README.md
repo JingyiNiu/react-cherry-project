@@ -23,13 +23,13 @@ https://axios-http.com/docs/intro
 
 ## Screenshots
 Products:   
-<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products.png" width=600>  
+<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products.png" width=800>  
 
 Orders:   
-<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/orders.png" width=600>   
+<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/orders.png" width=800>   
 
 Form:   
-<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products-form.png" width=600>   
+<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products-form.png" width=800>   
 
 Confirm Dialog:   
-<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products-comfirm-dialog.png" width=600>   
+<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products-comfirm-dialog.png" width=800>   
