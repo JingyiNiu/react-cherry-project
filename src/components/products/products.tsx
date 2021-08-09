@@ -243,6 +243,7 @@ const Products = () => {
           className={`button btn-primary ${classes.addButton}`}
           onClick={() => {
             setOpenPopup(true);
+            setRecordForEdit(null);
           }}
         >
           + New Product
