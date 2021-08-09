@@ -257,6 +257,10 @@ const AllOrders = () => {
   const resetButton = (e) => {
     e.preventDefault();
     console.log("reset is clicked");
+    const startHTML = document.getElementById("startDate") as HTMLInputElement;
+    const endHTML = document.getElementById("endDate") as HTMLInputElement;
+    startHTML.value = "";
+    endHTML.value = "";
     setFilterFunction({ func: (orders) => orders });
   };
 
@@ -314,7 +318,11 @@ const AllOrders = () => {
           <button className='button btn-primary' onClick={handleFilterByDate}>
             Filter By Date Range
           </button>
-          <button className='button btn-gray' onClick={resetButton}>
+          <button
+            className='button btn-gray'
+            onClick={resetButton}
+            type='reset'
+          >
             Reset
           </button>
         </form>
