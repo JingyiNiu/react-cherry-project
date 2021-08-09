@@ -247,10 +247,10 @@ const AllOrders = () => {
     });
   };
 
-  const resetButton = () => {
+  const resetButton = (e) => {
+    e.preventDefault();
     console.log("reset is clicked");
-    // ordersAfterPagingAndSoring();
-    // setFilterFunction({ func: (orders) => orders });
+    setFilterFunction({ func: (orders) => orders });
   };
 
   // ******************* Filter *******************
