@@ -37,5 +37,8 @@ https://axios-http.com/docs/intro
 **All Orders:**   
 <img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/all-orders.png" width=800>   
 
-**Search Order By Order ID:**   
+**Search Orders By Order ID:**   
 <img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/all-orders-search.png" width=800>   
+
+**Filter Orders By Date Range:**   
+<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/all-orders-filter.png" width=800>   
