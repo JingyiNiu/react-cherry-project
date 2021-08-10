@@ -42,3 +42,9 @@ https://axios-http.com/docs/intro
 
 **Filter Orders By Date Range:**   
 <img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/all-orders-filter.png" width=800>   
+
+**Register:**   
+<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/register.png" width=800>   
+
+**Sign In:**   
+<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/signin.png" width=800>   
