@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { UserRegisterError } from "../../Interfaces/UserRegisterError";
 import axios from "axios";
 import { Redirect } from "react-router";
+import { useHistory } from "react-router-dom";
 import Notification from "../notification";
 
 import Avatar from "@material-ui/core/Avatar";
@@ -69,6 +70,7 @@ const initialFormValues = {
 
 const RegisterForm = () => {
   const classes = useStyles();
+  let history = useHistory();
 
   const [values, setValues] = useState(initialFormValues);
   const [errors, setErrors] = useState({});
@@ -84,6 +86,7 @@ const RegisterForm = () => {
       values.userName.length !== 0 ? "" : "This field is required.";
     temp.password =
       values.password.length !== 0 ? "" : "This field is required.";
+    temp.password = values.password.length > 5 ? "" : "At least 6 characters.";
     temp.confirmPassword =
       values.confirmPassword == values.password
         ? ""
@@ -104,8 +107,13 @@ const RegisterForm = () => {
     });
   };
 
+  const resetForm = () => {
+    setValues(initialFormValues);
+  };
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
+
     if (validate()) {
       const data = {
         userName: values.userName,
@@ -118,12 +126,25 @@ const RegisterForm = () => {
         mobileNumber: values.mobileNumber,
         email: values.email,
       };
-      // axios.post("http://206.189.39.185:5031//api/User/UserRegister", data);
-      setNotify({
-        isOpen: true,
-        message: "New Account Created Successfully",
-        type: "success",
-      });
+      axios
+        .post("http://206.189.39.185:5031/api/User/UserRegister", data)
+        .then((response) => {
+          console.log(response);
+          setNotify({
+            isOpen: true,
+            message: "New Account Created Successfully",
+            type: "success",
+          });
+          resetForm();
+        })
+        .catch((error) => {
+          console.log(error);
+          setNotify({
+            isOpen: true,
+            message: "There Is An Error. Please Try Again",
+            type: "error",
+          });
+        });
     }
   };
 
