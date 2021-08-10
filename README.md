@@ -22,14 +22,17 @@ https://axios-http.com/docs/intro
 `npm install axios`
 
 ## Screenshots
-Products:   
+**Products:**   
 <img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products.png" width=800>  
+
+**Products Form For Adding New Product:**   
+<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products-create.png" width=800>   
+
+**Products Form For Editing An Existing Product:**   
+<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products-create.png" width=800>   
+
+**Confirm Dialog:**   
+<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products-comfirm-dialog.png" width=800>   
 
 Orders:   
 <img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/all-orders.png" width=800>   
-
-Form:   
-<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products-form.png" width=800>   
-
-Confirm Dialog:   
-<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products-comfirm-dialog.png" width=800>   
