@@ -1,5 +1,4 @@
 export interface UserRegister {
-  userId: number;
   userName: string;
   password: string;
   type: number;
@@ -9,7 +8,4 @@ export interface UserRegister {
   companyName: string;
   mobileNumber: string;
   email: string;
-  isActive: number;
-  createdAt: string;
-  tOrder: [];
 }
