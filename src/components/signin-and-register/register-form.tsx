@@ -1,3 +1,8 @@
+import { useState, useEffect } from "react";
+import { Input } from "../controls/Input";
+import { Link } from "react-router-dom";
+import { UserRegister } from "../../Interfaces/UserRegister";
+
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,9 +12,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-
-import { Input } from "../controls/Input";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,8 +48,50 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const initialFormValues = {
+  userName: "",
+  password: "",
+  confirmPassword: "",
+  type: "",
+  discountRate: "",
+  firstName: "",
+  lastName: "",
+  companyName: "",
+  mobileNumber: "",
+  email: "",
+};
+
 const RegisterForm = () => {
   const classes = useStyles();
+
+  const [values, setValues] = useState(initialFormValues);
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {};
+
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const data = {
+      userName: values.userName,
+      password: values.password,
+      type: parseInt(values.type),
+      discountRate: parseInt(values.discountRate),
+      firstName: values.firstName,
+      lastName: values.lastName,
+      companyName: values.companyName,
+      mobileNumber: values.mobileNumber,
+      email: values.email,
+    };
+    console.log(data);
+  };
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -58,32 +102,57 @@ const RegisterForm = () => {
 
         {/* Register Form */}
         <h2>Register</h2>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {/* Username */}
             <Grid item xs={12}>
-              <Input label='Username *' fullWidth />
+              <Input
+                fullWidth
+                name='userName'
+                label='Username *'
+                value={values.userName}
+                onChange={handleInputChange}
+              />
             </Grid>
 
             {/* Password */}
             <Grid item xs={12}>
-              <Input label='Password *' type='password' fullWidth />
+              <Input
+                fullWidth
+                type='password'
+                name='password'
+                label='Password *'
+                value={values.password}
+                onChange={handleInputChange}
+              />
             </Grid>
 
             {/* Confirm Password */}
             <Grid item xs={12}>
-              <Input label='Confirm Password *' type='password' fullWidth />
+              <Input
+                fullWidth
+                type='password'
+                name='confirmPassword'
+                label='Confirm Password *'
+                value={values.confirmPassword}
+                onChange={handleInputChange}
+              />
             </Grid>
 
             {/* User Type */}
             <FormControl
+              fullWidth
               variant='outlined'
               className={classes.formControl}
-              fullWidth
             >
               <InputLabel id='user-type'>User Type *</InputLabel>
-              <Select labelId='user-type' label='User Type * '>
-                <MenuItem value={0}>0</MenuItem>
+              <Select
+                labelId='user-type'
+                label='User Type * '
+                name='type'
+                value={values.type}
+                onChange={handleInputChange}
+              >
                 <MenuItem value={1}>1</MenuItem>
                 <MenuItem value={2}>2</MenuItem>
                 <MenuItem value={3}>3</MenuItem>
@@ -93,12 +162,18 @@ const RegisterForm = () => {
 
             {/* Discount Rate */}
             <FormControl
+              fullWidth
               variant='outlined'
               className={classes.formControl}
-              fullWidth
             >
               <InputLabel id='discount-rate'>Discount Rate *</InputLabel>
-              <Select labelId='discount-rate' label='Discount Rate * '>
+              <Select
+                labelId='discount-rate'
+                label='Discount Rate * '
+                name='discountRate'
+                value={values.discountRate}
+                onChange={handleInputChange}
+              >
                 <MenuItem value={1}>1</MenuItem>
                 <MenuItem value={2}>2</MenuItem>
                 <MenuItem value={3}>3</MenuItem>
@@ -109,25 +184,53 @@ const RegisterForm = () => {
 
             {/* Full Name */}
             <Grid item xs={12} sm={6}>
-              <Input label='First Name' />
+              <Input
+                label='First Name'
+                name='firstName'
+                value={values.firstName}
+                onChange={handleInputChange}
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Input label='Last Name' />
+              <Input
+                label='Last Name'
+                name='lastName'
+                value={values.lastName}
+                onChange={handleInputChange}
+              />
             </Grid>
 
             {/* Email */}
             <Grid item xs={12}>
-              <Input label='Email' fullWidth />
+              <Input
+                fullWidth
+                label='Email'
+                name='email'
+                value={values.email}
+                onChange={handleInputChange}
+              />
             </Grid>
 
             {/* Phone Number */}
             <Grid item xs={12}>
-              <Input label='Phone Number' fullWidth />
+              <Input
+                fullWidth
+                label='Phone Number'
+                name='mobileNumber'
+                value={values.mobileNumber}
+                onChange={handleInputChange}
+              />
             </Grid>
 
             {/* Company Name */}
             <Grid item xs={12}>
-              <Input label='Company Name' fullWidth />
+              <Input
+                fullWidth
+                label='Company Name'
+                name='companyName'
+                value={values.companyName}
+                onChange={handleInputChange}
+              />
             </Grid>
 
             {/* Submit Button */}
