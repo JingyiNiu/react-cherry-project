@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Input } from "../controls/Input";
 import { Link } from "react-router-dom";
 import { UserRegister } from "../../Interfaces/UserRegister";
+import { UserRegisterError } from "../../Interfaces/UserRegisterError";
 
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
@@ -67,7 +68,23 @@ const RegisterForm = () => {
   const [values, setValues] = useState(initialFormValues);
   const [errors, setErrors] = useState({});
 
-  const validate = () => {};
+  const validate = () => {
+    let temp = {} as UserRegisterError;
+    temp.userName =
+      values.userName.length !== 0 ? "" : "This field is required.";
+    temp.password =
+      values.password.length !== 0 ? "" : "This field is required.";
+    temp.confirmPassword =
+      values.confirmPassword == values.password
+        ? ""
+        : "Confirm Password must equals to Password";
+    temp.type = values.type.length !== 0 ? "" : "This field is required.";
+    temp.discountRate =
+      values.discountRate.length !== 0 ? "" : "This field is required.";
+    setErrors({ ...temp });
+
+    return Object.values(temp).every((x) => x == "");
+  };
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -79,18 +96,20 @@ const RegisterForm = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const data = {
-      userName: values.userName,
-      password: values.password,
-      type: parseInt(values.type),
-      discountRate: parseInt(values.discountRate),
-      firstName: values.firstName,
-      lastName: values.lastName,
-      companyName: values.companyName,
-      mobileNumber: values.mobileNumber,
-      email: values.email,
-    };
-    console.log(data);
+    if (validate()) {
+      const data = {
+        userName: values.userName,
+        password: values.password,
+        type: parseInt(values.type),
+        discountRate: parseInt(values.discountRate),
+        firstName: values.firstName,
+        lastName: values.lastName,
+        companyName: values.companyName,
+        mobileNumber: values.mobileNumber,
+        email: values.email,
+      };
+      console.log(data);
+    }
   };
 
   return (
@@ -112,6 +131,7 @@ const RegisterForm = () => {
                 label='Username *'
                 value={values.userName}
                 onChange={handleInputChange}
+                error={errors["userName"]}
               />
             </Grid>
 
@@ -124,6 +144,7 @@ const RegisterForm = () => {
                 label='Password *'
                 value={values.password}
                 onChange={handleInputChange}
+                error={errors["password"]}
               />
             </Grid>
 
@@ -136,6 +157,7 @@ const RegisterForm = () => {
                 label='Confirm Password *'
                 value={values.confirmPassword}
                 onChange={handleInputChange}
+                error={errors["confirmPassword"]}
               />
             </Grid>
 
@@ -152,6 +174,7 @@ const RegisterForm = () => {
                 name='type'
                 value={values.type}
                 onChange={handleInputChange}
+                error={errors["type"]}
               >
                 <MenuItem value={1}>1</MenuItem>
                 <MenuItem value={2}>2</MenuItem>
@@ -173,6 +196,7 @@ const RegisterForm = () => {
                 name='discountRate'
                 value={values.discountRate}
                 onChange={handleInputChange}
+                error={errors["discountRate"]}
               >
                 <MenuItem value={1}>1</MenuItem>
                 <MenuItem value={2}>2</MenuItem>
