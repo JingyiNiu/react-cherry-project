@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { UserRegisterError } from "../../Interfaces/UserRegisterError";
 import axios from "axios";
 import { Redirect } from "react-router";
+import Notification from "../notification";
 
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
@@ -71,6 +72,11 @@ const RegisterForm = () => {
 
   const [values, setValues] = useState(initialFormValues);
   const [errors, setErrors] = useState({});
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
 
   const validate = () => {
     let temp = {} as UserRegisterError;
@@ -113,6 +119,11 @@ const RegisterForm = () => {
         email: values.email,
       };
       // axios.post("http://206.189.39.185:5031//api/User/UserRegister", data);
+      setNotify({
+        isOpen: true,
+        message: "New Account Created Successfully",
+        type: "success",
+      });
     }
   };
 
@@ -278,6 +289,9 @@ const RegisterForm = () => {
           </Grid>
         </form>
       </div>
+
+      {/* Notification */}
+      <Notification notify={notify} setNotify={setNotify} />
     </Container>
   );
 };
