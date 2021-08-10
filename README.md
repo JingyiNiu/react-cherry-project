@@ -29,7 +29,7 @@ https://axios-http.com/docs/intro
 <img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products-create.png" width=800>   
 
 **Products Form For Editing An Existing Product:**   
-<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products-create.png" width=800>   
+<img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products-edit.png" width=800>   
 
 **Confirm Dialog Before Deleting An Product:**   
 <img src="https://github.com/JingyiNiu/react-cherry-project/blob/master/public/screenshots/products-delete.png" width=800>   
