@@ -3,10 +3,8 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
@@ -69,7 +67,12 @@ const RegisterForm = () => {
 
             {/* Password */}
             <Grid item xs={12}>
-              <Input label='Password *' fullWidth />
+              <Input label='Password *' type='password' fullWidth />
+            </Grid>
+
+            {/* Confirm Password */}
+            <Grid item xs={12}>
+              <Input label='Confirm Password *' type='password' fullWidth />
             </Grid>
 
             {/* User Type */}
