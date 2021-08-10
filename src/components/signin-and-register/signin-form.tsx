@@ -1,3 +1,8 @@
+import { useState } from "react";
+import { UserSigninError } from "../../Interfaces/UserSigninError";
+import { Input } from "../controls/Input";
+import { Link } from "react-router-dom";
+
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -5,9 +10,6 @@ import Container from "@material-ui/core/Container";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-
-import { Input } from "../controls/Input";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,8 +42,55 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const initialFormValues = {
+  userName: "",
+  password: "",
+};
+
 const SigninForm = () => {
   const classes = useStyles();
+
+  const [values, setValues] = useState(initialFormValues);
+  const [errors, setErrors] = useState({});
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+
+  const validate = () => {
+    let temp = {} as UserSigninError;
+    temp.userName =
+      values.userName.length !== 0 ? "" : "This field is required.";
+    temp.password =
+      values.password.length !== 0 ? "" : "This field is required.";
+    setErrors({ ...temp });
+
+    return Object.values(temp).every((x) => x == "");
+  };
+
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  const resetForm = () => {
+    setValues(initialFormValues);
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    if (validate()) {
+      const data = {
+        userName: values.userName,
+        password: values.password,
+      };
+      console.log(data);
+    }
+  };
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -52,16 +101,31 @@ const SigninForm = () => {
 
         {/* Signin Form */}
         <h2>Sign In</h2>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {/* Username */}
             <Grid item xs={12}>
-              <Input label='Username *' fullWidth />
+              <Input
+                fullWidth
+                name='userName'
+                label='Username *'
+                value={values.userName}
+                onChange={handleInputChange}
+                error={errors["userName"]}
+              />
             </Grid>
 
             {/* Password */}
             <Grid item xs={12}>
-              <Input label='Password *' fullWidth />
+              <Input
+                fullWidth
+                type='password'
+                name='password'
+                label='Password *'
+                value={values.password}
+                onChange={handleInputChange}
+                error={errors["password"]}
+              />
             </Grid>
 
             {/* Remember me */}
