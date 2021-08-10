@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Input } from "../controls/Input";
 import { Link } from "react-router-dom";
-import { UserRegister } from "../../Interfaces/UserRegister";
 import { UserRegisterError } from "../../Interfaces/UserRegisterError";
+import axios from "axios";
+import { Redirect } from "react-router";
 
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
@@ -39,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "none",
     color: "black",
+    "&:hover": {
+      borderBottom: "1px solid",
+    },
   },
   formControl: {
     margin: theme.spacing(1),
@@ -108,7 +112,7 @@ const RegisterForm = () => {
         mobileNumber: values.mobileNumber,
         email: values.email,
       };
-      console.log(data);
+      // axios.post("http://206.189.39.185:5031//api/User/UserRegister", data);
     }
   };
 

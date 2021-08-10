@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "none",
     color: "black",
+    "&:hover": {
+      borderBottom: "1px solid",
+    },
   },
 }));
 
