@@ -85,7 +85,6 @@ const SigninForm = (props) => {
 
   const handleRememberMe = (e) => {
     setRememberMe(!rememberMe);
-    console.log(rememberMe);
   };
 
   const resetForm = () => {
@@ -110,10 +109,9 @@ const SigninForm = (props) => {
           });
           resetForm();
           setCurrentUser(response.data.data);
-          console.log("data", response.data.data);
-          console.log("rememberMe", rememberMe);
           if (rememberMe === true)
             localStorage.setItem("token", response.data.data.token);
+          localStorage.setItem("tokenCreatedAt", new Date().toISOString());
         })
         .catch((error) => {
           console.log(error);

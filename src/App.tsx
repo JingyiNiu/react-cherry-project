@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -29,6 +29,17 @@ const theme = createTheme({
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    getTokenFromlocalStorage();
+  }, []);
+
+  const getTokenFromlocalStorage = () => {
+    const token = localStorage.getItem("token");
+    const tokenCreatedAt = localStorage.getItem("tokenCreatedAt");
+    console.log("tokenCreatedAt", tokenCreatedAt);
+    console.log("token", token);
+  };
 
   return (
     <ThemeProvider theme={theme}>
