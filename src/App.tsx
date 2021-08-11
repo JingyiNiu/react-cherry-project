@@ -16,6 +16,7 @@ import OrdersPage from "./pages/orders/orders.page";
 import Register from "./pages/register/register.page";
 import Signin from "./pages/signin/signin.page";
 
+import Test from "./components/test";
 import { createTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import "./App.css";
@@ -35,6 +36,7 @@ function App() {
         <Nav currentUser={currentUser} setCurrentUser={setCurrentUser} />
         <Switch>
           <Route path='/' exact component={HomePage} />
+          <Route path='/test' exact component={Test} />
           <Route path='/products'>
             {!currentUser ? <Redirect to='/signin' /> : <ProductsPage />}
           </Route>

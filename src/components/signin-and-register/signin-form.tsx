@@ -12,6 +12,7 @@ import Container from "@material-ui/core/Container";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import { createTrue } from "typescript";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +52,7 @@ const initialFormValues = {
 
 const SigninForm = (props) => {
   const { currentUser, setCurrentUser } = props;
+  const [rememberMe, setRememberMe] = useState(false);
 
   const classes = useStyles();
 
@@ -81,6 +83,11 @@ const SigninForm = (props) => {
     });
   };
 
+  const handleRememberMe = (e) => {
+    setRememberMe(!rememberMe);
+    console.log(rememberMe);
+  };
+
   const resetForm = () => {
     setValues(initialFormValues);
   };
@@ -103,7 +110,10 @@ const SigninForm = (props) => {
           });
           resetForm();
           setCurrentUser(response.data.data);
-          console.log(response.data.data);
+          console.log("data", response.data.data);
+          console.log("rememberMe", rememberMe);
+          if (rememberMe === true)
+            localStorage.setItem("token", response.data.data.token);
         })
         .catch((error) => {
           console.log(error);
@@ -157,7 +167,14 @@ const SigninForm = (props) => {
             {/* Remember me */}
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox value='remember' color='primary' />}
+                control={
+                  <Checkbox
+                    color='primary'
+                    name='rememberMe'
+                    onChange={handleRememberMe}
+                    checked={rememberMe}
+                  />
+                }
                 label='Remember me'
               />
             </Grid>
