@@ -79,7 +79,7 @@ const Products = () => {
   const getProducts = async () => {
     try {
       const url = "http://206.189.39.185:5031/api/Product";
-      const apiCall = await axios.get(url).then((res) => {
+      await axios.get(url).then((res) => {
         setProducts(res.data.data);
       });
     } catch (error) {

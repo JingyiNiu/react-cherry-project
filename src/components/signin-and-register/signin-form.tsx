@@ -2,6 +2,8 @@ import { useState } from "react";
 import { UserSigninError } from "../../Interfaces/UserSigninError";
 import { Input } from "../controls/Input";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import Notification from "../notification";
 
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
@@ -66,7 +68,7 @@ const SigninForm = () => {
       values.password.length !== 0 ? "" : "This field is required.";
     setErrors({ ...temp });
 
-    return Object.values(temp).every((x) => x == "");
+    return Object.values(temp).every((x) => x === "");
   };
 
   const handleInputChange = (e: any) => {
@@ -89,6 +91,27 @@ const SigninForm = () => {
         password: values.password,
       };
       console.log(data);
+      axios
+        .post("http://206.189.39.185:5031/api/User/UserLogin", data)
+        .then((response) => {
+          console.log(response);
+          setNotify({
+            isOpen: true,
+            message: "Signed In Successfully",
+            type: "success",
+          });
+          resetForm();
+        })
+        .catch((error) => {
+          console.log(error);
+          setNotify({
+            isOpen: true,
+            message: "Sign in error. Please try again",
+            type: "error",
+          });
+        });
+
+      resetForm();
     }
   };
 
@@ -153,6 +176,9 @@ const SigninForm = () => {
           </Grid>
         </form>
       </div>
+
+      {/* Notification */}
+      <Notification notify={notify} setNotify={setNotify} />
     </Container>
   );
 };

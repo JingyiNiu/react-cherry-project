@@ -95,7 +95,7 @@ const AllOrders = () => {
     try {
       const url =
         "http://206.189.39.185:5031/api/Order/GetOrderList/userId/status?status=9";
-      const apiCall = await axios.get(url).then((res) => {
+      await axios.get(url).then((res) => {
         setOrders(res.data.data);
         setLoading(true);
       });

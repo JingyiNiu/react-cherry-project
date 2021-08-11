@@ -3,8 +3,6 @@ import { Input } from "../controls/Input";
 import { Link } from "react-router-dom";
 import { UserRegisterError } from "../../Interfaces/UserRegisterError";
 import axios from "axios";
-import { Redirect } from "react-router";
-import { useHistory } from "react-router-dom";
 import Notification from "../notification";
 
 import Avatar from "@material-ui/core/Avatar";
@@ -70,7 +68,6 @@ const initialFormValues = {
 
 const RegisterForm = () => {
   const classes = useStyles();
-  let history = useHistory();
 
   const [values, setValues] = useState(initialFormValues);
   const [errors, setErrors] = useState({});
@@ -86,9 +83,9 @@ const RegisterForm = () => {
       values.userName.length !== 0 ? "" : "This field is required.";
     temp.password =
       values.password.length !== 0 ? "" : "This field is required.";
-    temp.password = values.password.length > 5 ? "" : "At least 6 characters.";
+    // temp.password = values.password.length > 5 ? "" : "At least 6 characters.";
     temp.confirmPassword =
-      values.confirmPassword == values.password
+      values.confirmPassword === values.password
         ? ""
         : "Confirm Password must equals to Password";
     temp.type = values.type.length !== 0 ? "" : "This field is required.";
@@ -96,7 +93,7 @@ const RegisterForm = () => {
       values.discountRate.length !== 0 ? "" : "This field is required.";
     setErrors({ ...temp });
 
-    return Object.values(temp).every((x) => x == "");
+    return Object.values(temp).every((x) => x === "");
   };
 
   const handleInputChange = (e: any) => {
