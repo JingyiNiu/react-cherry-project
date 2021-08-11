@@ -82,7 +82,7 @@ const useStyles = makeStyles({
 });
 
 // ################### All Orders ###################
-const AllOrders = () => {
+const AllOrders = (props) => {
   const classes = useStyles();
   const [orders, setOrders] = useState<any>([]);
   const [loading, setLoading] = useState(false);

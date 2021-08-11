@@ -49,7 +49,9 @@ const initialFormValues = {
   password: "",
 };
 
-const SigninForm = () => {
+const SigninForm = (props) => {
+  const { currentUser, setCurrentUser } = props;
+
   const classes = useStyles();
 
   const [values, setValues] = useState(initialFormValues);
@@ -94,13 +96,14 @@ const SigninForm = () => {
       axios
         .post("http://206.189.39.185:5031/api/User/UserLogin", data)
         .then((response) => {
-          console.log(response);
           setNotify({
             isOpen: true,
             message: "Signed In Successfully",
             type: "success",
           });
           resetForm();
+          setCurrentUser(response.data.data);
+          console.log(response.data.data);
         })
         .catch((error) => {
           console.log(error);

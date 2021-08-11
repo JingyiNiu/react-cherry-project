@@ -25,7 +25,7 @@ function TabPanel(props) {
   );
 }
 
-const OrdersPage = () => {
+const OrdersPage = (props) => {
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {

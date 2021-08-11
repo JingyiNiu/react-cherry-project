@@ -1,9 +1,10 @@
 import SigninForm from "../../components/signin-and-register/signin-form";
 
-const Signin = () => {
+const Signin = (props) => {
+  const { currentUser, setCurrentUser } = props;
   return (
     <div className='main-container'>
-      <SigninForm />
+      <SigninForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
     </div>
   );
 };
