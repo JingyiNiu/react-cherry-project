@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 import Nav from "./components/nav/nav.component";
 import Footer from "./components/footer/footer.component";
@@ -23,14 +28,19 @@ const theme = createTheme({
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <Nav currentUser={currentUser} setCurrentUser={setCurrentUser} />
         <Switch>
           <Route path='/' exact component={HomePage} />
-          <Route path='/products' component={ProductsPage} />
-          <Route path='/orders' component={OrdersPage} />
+          <Route path='/products'>
+            {!currentUser ? <Redirect to='/signin' /> : <ProductsPage />}
+          </Route>
+          <Route path='/orders'>
+            {!currentUser ? <Redirect to='/signin' /> : <OrdersPage />}
+          </Route>
           <Route path='/register' component={Register} />
           <Route path='/signin'>
             <Signin currentUser={currentUser} setCurrentUser={setCurrentUser} />
