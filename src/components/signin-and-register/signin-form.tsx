@@ -12,7 +12,6 @@ import Container from "@material-ui/core/Container";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import { createTrue } from "typescript";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,7 +50,7 @@ const initialFormValues = {
 };
 
 const SigninForm = (props) => {
-  const { currentUser, setCurrentUser } = props;
+  const { setCurrentUser } = props;
   const [rememberMe, setRememberMe] = useState(false);
 
   const classes = useStyles();
@@ -109,9 +108,12 @@ const SigninForm = (props) => {
           });
           resetForm();
           setCurrentUser(response.data.data);
-          if (rememberMe === true)
-            localStorage.setItem("token", response.data.data.token);
-          localStorage.setItem("tokenCreatedAt", new Date().toISOString());
+          if (rememberMe === true) {
+            const tokenObject = response.data.data;
+            const tokenTime = new Date();
+            tokenObject.createdAt = tokenTime;
+            localStorage.setItem("token", JSON.stringify(tokenObject));
+          }
         })
         .catch((error) => {
           console.log(error);

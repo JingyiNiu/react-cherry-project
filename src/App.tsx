@@ -35,9 +35,11 @@ function App() {
   }, []);
 
   const getTokenFromlocalStorage = () => {
-    const token = localStorage.getItem("token");
-    const tokenCreatedAt = localStorage.getItem("tokenCreatedAt");
-    console.log("tokenCreatedAt", tokenCreatedAt);
+    const tokenString = localStorage.getItem("token");
+    if (!tokenString) {
+      return null;
+    }
+    const token = JSON.parse(tokenString);
     console.log("token", token);
   };
 

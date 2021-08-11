@@ -37,7 +37,7 @@ const Nav = (props) => {
           <Link to='/register' className='nav-item nav-item-sm'>
             Profile
           </Link>
-          <a className='nav-item nav-item-sm' onClick={signOut}>
+          <a href='/signin' className='nav-item nav-item-sm' onClick={signOut}>
             Sign Out
           </a>
         </div>
