@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./nav.style.css";
 
 const Nav = (props) => {
-  const { currentUser, setCurrentUser } = props;
+  const { currentUser, setCurrentUser, n } = props;
 
   const signOut = () => {
     setCurrentUser(null);
@@ -23,7 +23,16 @@ const Nav = (props) => {
           Orders
         </Link>
       </div>
-      {!currentUser ? (
+      {currentUser ? (
+        <div className='nav-right'>
+          <Link to='/' className='nav-item nav-item-sm'>
+            Hi, {currentUser.userName}
+          </Link>
+          <a href='/signin' className='nav-item nav-item-sm' onClick={signOut}>
+            Sign Out
+          </a>
+        </div>
+      ) : (
         <div className='nav-right'>
           <Link to='/register' className='nav-item nav-item-sm'>
             Register
@@ -31,15 +40,6 @@ const Nav = (props) => {
           <Link to='/signin' className='nav-item nav-item-sm'>
             Sign in
           </Link>
-        </div>
-      ) : (
-        <div className='nav-right'>
-          <Link to='/register' className='nav-item nav-item-sm'>
-            Profile
-          </Link>
-          <a href='/signin' className='nav-item nav-item-sm' onClick={signOut}>
-            Sign Out
-          </a>
         </div>
       )}
     </div>

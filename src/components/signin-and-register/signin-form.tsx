@@ -107,7 +107,9 @@ const SigninForm = (props) => {
             type: "success",
           });
           resetForm();
+
           setCurrentUser(response.data.data);
+
           if (rememberMe === true) {
             const tokenObject = response.data.data;
             const tokenTime = new Date();

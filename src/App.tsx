@@ -29,18 +29,26 @@ const theme = createTheme({
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [logIn, setLogIn] = useState(false);
 
   useEffect(() => {
-    getTokenFromlocalStorage();
-  }, []);
+    getTokenFromLocalStorage();
+    console.log("currentUser at App", currentUser);
+  });
 
-  const getTokenFromlocalStorage = () => {
+  const getTokenFromLocalStorage = () => {
     const tokenString = localStorage.getItem("token");
     if (!tokenString) {
       return null;
     }
     const token = JSON.parse(tokenString);
     console.log("token", token);
+    console.log("logIn", logIn);
+
+    // if (token) {
+    //   setLogIn(true);
+    //   setCurrentUser(currentUser);
+    // }
   };
 
   return (
@@ -51,14 +59,14 @@ function App() {
           <Route path='/' exact component={HomePage} />
           <Route path='/test' exact component={Test} />
           <Route path='/products'>
-            {!currentUser ? <Redirect to='/signin' /> : <ProductsPage />}
+            {currentUser ? <ProductsPage /> : <Redirect to='/signin' />}
           </Route>
           <Route path='/orders'>
-            {!currentUser ? <Redirect to='/signin' /> : <OrdersPage />}
+            {currentUser ? <OrdersPage /> : <Redirect to='/signin' />}
           </Route>
           <Route path='/register' component={Register} />
           <Route path='/signin'>
-            <Signin currentUser={currentUser} setCurrentUser={setCurrentUser} />
+            <Signin setCurrentUser={setCurrentUser} />
           </Route>
         </Switch>
         <Footer />
