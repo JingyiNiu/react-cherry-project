@@ -118,7 +118,12 @@ const SigninForm = (props) => {
             tokenObject.createdAt = tokenTime;
             localStorage.setItem("token", JSON.stringify(tokenObject));
           }
+
+          setTimeout(function () {
+            history.push("/");
+          }, 1500);
         })
+
         .catch((error) => {
           console.log(error);
           setNotify({

@@ -9,14 +9,18 @@ const Nav = (props) => {
 
   const signOut = (e) => {
     e.preventDefault();
-    setCurrentUser(null);
-    localStorage.removeItem("token");
+
     setNotify({
       isOpen: true,
       message: "Successfully Signed Out",
       type: "success",
     });
-    history.push("/signin");
+
+    setTimeout(function () {
+      setCurrentUser(null);
+      localStorage.removeItem("token");
+      history.push("/signin");
+    }, 1500);
   };
 
   return (
