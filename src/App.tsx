@@ -37,16 +37,26 @@ function App() {
   });
 
   useEffect(() => {
-    if (getTokenFromLocalStorage()) {
-      console.log("Token exists in local storage");
-      setCurrentUser(getTokenFromLocalStorage());
-      console.log(currentUser);
+    removeTokenAfterExpiry();
+    const token = getTokenFromLocalStorage();
+    if (token) {
+      setCurrentUser(token);
     } else {
-      console.log("There is no token in local storage");
       setCurrentUser(null);
-      console.log(currentUser);
     }
   }, []);
+
+  const removeTokenAfterExpiry = () => {
+    const tokenString = localStorage.getItem("token");
+    if (tokenString) {
+      const token = JSON.parse(tokenString);
+      const now = new Date().getTime();
+      const tokenExpiry = token.expireAt;
+      if (now > tokenExpiry) {
+        localStorage.removeItem("token");
+      }
+    }
+  };
 
   const getTokenFromLocalStorage = () => {
     const tokenString = localStorage.getItem("token");
@@ -54,7 +64,6 @@ function App() {
       return null;
     }
     const token = JSON.parse(tokenString);
-
     return token;
   };
 
@@ -67,7 +76,9 @@ function App() {
           setNotify={setNotify}
         />
         <Switch>
-          <Route path='/' exact component={HomePage} />
+          <Route path='/' exact>
+            <HomePage currentUser={currentUser} />
+          </Route>
           <Route path='/test' exact component={Test} />
           <Route path='/products'>
             {currentUser ? <ProductsPage /> : <Redirect to='/signin' />}

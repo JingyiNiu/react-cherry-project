@@ -94,38 +94,47 @@ const SigninForm = (props) => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+
     if (validate()) {
       const data = {
         userName: values.userName,
         password: values.password,
       };
       console.log(data);
+
+      // Post to API
       axios
         .post("http://206.189.39.185:5031/api/User/UserLogin", data)
         .then((response) => {
+          // Success message
           setNotify({
             isOpen: true,
             message: "Signed In Successfully",
             type: "success",
           });
           resetForm();
-
           setCurrentUser(response.data.data);
 
+          // If <remenber me> is checked, save token to local storage
           if (rememberMe === true) {
             const tokenObject = response.data.data;
-            const tokenTime = new Date();
-            tokenObject.createdAt = tokenTime;
+            const tokenCreated = new Date();
+            tokenObject.createdAt = tokenCreated;
+            // token expires in 7 days
+            const tokenExpiry = new Date().getTime() + 604800000;
+            tokenObject.expireAt = tokenExpiry;
             localStorage.setItem("token", JSON.stringify(tokenObject));
           }
 
+          // Redirect to homepage after 1.5 seconds
           setTimeout(function () {
             history.push("/");
           }, 1500);
         })
-
         .catch((error) => {
           console.log(error);
+
+          // Error message
           setNotify({
             isOpen: true,
             message: "Sign in error. Please try again",
