@@ -4,6 +4,7 @@ import { Input } from "../controls/Input";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Notification from "../notification";
+import { useHistory } from "react-router";
 
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
@@ -51,6 +52,7 @@ const initialFormValues = {
 
 const SigninForm = (props) => {
   const { setCurrentUser } = props;
+  const history = useHistory();
   const [rememberMe, setRememberMe] = useState(false);
 
   const classes = useStyles();

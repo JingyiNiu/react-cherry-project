@@ -1,12 +1,22 @@
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
 
 import "./nav.style.css";
 
 const Nav = (props) => {
-  const { currentUser, setCurrentUser, n } = props;
+  const { currentUser, setCurrentUser, setNotify } = props;
+  const history = useHistory();
 
-  const signOut = () => {
+  const signOut = (e) => {
+    e.preventDefault();
     setCurrentUser(null);
+    localStorage.removeItem("token");
+    setNotify({
+      isOpen: true,
+      message: "Successfully Signed Out",
+      type: "success",
+    });
+    history.push("/signin");
   };
 
   return (

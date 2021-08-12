@@ -17,6 +17,7 @@ import Register from "./pages/register/register.page";
 import Signin from "./pages/signin/signin.page";
 
 import Test from "./components/test";
+import Notification from "./components/notification";
 import { createTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import "./App.css";
@@ -29,12 +30,23 @@ const theme = createTheme({
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  const [logIn, setLogIn] = useState(false);
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
 
   useEffect(() => {
-    getTokenFromLocalStorage();
-    console.log("currentUser at App", currentUser);
-  });
+    if (getTokenFromLocalStorage()) {
+      console.log("Token exists in local storage");
+      setCurrentUser(getTokenFromLocalStorage());
+      console.log(currentUser);
+    } else {
+      console.log("There is no token in local storage");
+      setCurrentUser(null);
+      console.log(currentUser);
+    }
+  }, []);
 
   const getTokenFromLocalStorage = () => {
     const tokenString = localStorage.getItem("token");
@@ -42,19 +54,18 @@ function App() {
       return null;
     }
     const token = JSON.parse(tokenString);
-    console.log("token", token);
-    console.log("logIn", logIn);
 
-    // if (token) {
-    //   setLogIn(true);
-    //   setCurrentUser(currentUser);
-    // }
+    return token;
   };
 
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Nav currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        <Nav
+          currentUser={currentUser}
+          setCurrentUser={setCurrentUser}
+          setNotify={setNotify}
+        />
         <Switch>
           <Route path='/' exact component={HomePage} />
           <Route path='/test' exact component={Test} />
@@ -71,6 +82,9 @@ function App() {
         </Switch>
         <Footer />
       </Router>
+
+      {/* Notification */}
+      <Notification notify={notify} setNotify={setNotify} />
     </ThemeProvider>
   );
 }
