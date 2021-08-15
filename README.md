@@ -10,7 +10,8 @@ https://reactrouter.com/core/guides/quick-start
 `npm i react-router-dom`
 
 ## Material-UI
-https://material-ui.com/getting-started/installation/
+https://material-ui.com/getting-started/installation/   
+https://material-ui.com/components/material-icons/
 ```
 npm install @material-ui/core
 
