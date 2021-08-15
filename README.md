@@ -1,8 +1,8 @@
 # React Cherry Project
-This is an ongoing react project. 
-If you are a guest, you have no access to products page or orders page. You will be redirect to sign-in page.
-It allows one-time sign in or if you checked "remember me" during signing in, your token will be saved at local storage and you won't need to sign in again in 7 days.
-Once you are signed in, you can browse both products and orders page which are build by material-ui table, it shows product item or order item get from API. Also, at products page, you could create a new product item, or edit/delet an existing product item. There will be successful or error message indicating wether you have succeed or failed.
+This is an ongoing react project.   
+If you are a guest, you have no access to products page or orders page. You will be redirect to sign-in page.   
+It allows one-time sign in or if you checked "remember me" during signing in, your token will be saved at local storage and you won't need to sign in again in 7 days.   
+Once you are signed in, you can browse both products and orders page which are build by material-ui table, it shows product item or order item get from API. Also, at products page, you could create a new product item, or edit/delet an existing product item. There will be successful or error message indicating wether you have succeed or failed.   
 
 ## Create TypeScript React App
 https://create-react-app.dev/docs/getting-started/   
