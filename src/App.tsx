@@ -41,8 +41,10 @@ function App() {
     const token = getTokenFromLocalStorage();
     if (token) {
       setCurrentUser(token);
+      console.log("current user exists");
     } else {
       setCurrentUser(null);
+      console.log("no user");
     }
   }, []);
 

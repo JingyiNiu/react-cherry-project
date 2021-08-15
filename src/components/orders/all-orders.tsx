@@ -252,6 +252,7 @@ const AllOrders = (props) => {
           } else if (endDate.length > 0 && startDate.length === 0) {
             return now < end;
           }
+          return null;
         });
       },
     });
