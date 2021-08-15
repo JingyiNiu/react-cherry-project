@@ -73,19 +73,22 @@ const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
+    let isMounted = true;
+    const getProducts = async () => {
+      try {
+        const url = "http://206.189.39.185:5031/api/Product";
+        await axios.get(url).then((res) => {
+          if (isMounted) setProducts(res.data.data);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getProducts();
+    return () => {
+      isMounted = false;
+    };
   }, [products]);
-
-  const getProducts = async () => {
-    try {
-      const url = "http://206.189.39.185:5031/api/Product";
-      await axios.get(url).then((res) => {
-        setProducts(res.data.data);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   interface HeadCell {
     id: string;

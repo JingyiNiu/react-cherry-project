@@ -88,21 +88,24 @@ const AllOrders = (props) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    let isMounted = true;
+    const getAllOrders = async () => {
+      try {
+        const url =
+          "http://206.189.39.185:5031/api/Order/GetOrderList/userId/status?status=9";
+        await axios.get(url).then((res) => {
+          if (isMounted) setOrders(res.data.data);
+          setLoading(true);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getAllOrders();
+    return () => {
+      isMounted = false;
+    };
   }, [orders]);
-
-  const getAllOrders = async () => {
-    try {
-      const url =
-        "http://206.189.39.185:5031/api/Order/GetOrderList/userId/status?status=9";
-      await axios.get(url).then((res) => {
-        setOrders(res.data.data);
-        setLoading(true);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   interface HeadCell {
     id: string;
