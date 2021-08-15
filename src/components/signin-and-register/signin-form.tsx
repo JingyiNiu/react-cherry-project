@@ -100,7 +100,6 @@ const SigninForm = (props) => {
         userName: values.userName,
         password: values.password,
       };
-      console.log(data);
 
       // Post to API
       axios

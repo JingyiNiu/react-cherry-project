@@ -12,6 +12,7 @@ import Footer from "./components/footer/footer.component";
 import HomePage from "./pages/home/home.page";
 import ProductsPage from "./pages/products/products.page";
 import OrdersPage from "./pages/orders/orders.page";
+import PageNotFound from "./pages/404/404.page";
 
 import Register from "./pages/register/register.page";
 import Signin from "./pages/signin/signin.page";
@@ -91,11 +92,15 @@ function App() {
           <Route path='/register' component={Register} />
           <Route path='/signin' exact>
             {currentUser ? (
-              <Redirect to='/' />
+              <Redirect from='/products' to='/products' />
             ) : (
               <Signin setCurrentUser={setCurrentUser} />
             )}
           </Route>
+          {/* <Route path='/signin' exact>
+            <Signin setCurrentUser={setCurrentUser} />
+          </Route> */}
+          <Route path='*' component={PageNotFound} />
         </Switch>
         <Footer />
       </Router>

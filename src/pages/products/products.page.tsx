@@ -1,6 +1,6 @@
 import Products from "../../components/products/products";
 
-const ProductsPage = () => {
+const ProductsPage = (props) => {
   return (
     <div className='main-container'>
       <h1>Products</h1>

@@ -1,14 +1,21 @@
 import "./test.css";
 
+// import { useLocation, useHistory } from "react-router";
+
 const Test = () => {
+  // const location = useLocation();
+  // let history = useHistory();
+
+  // const locationTest = () => {
+  //   console.log(location);
+  //   console.log(history);
+  // };
+
+  // locationTest();
+
   return (
     <div className='wrapper'>
-      <div className='one item'>One</div>
-      <div className='two item'>Two</div>
-      <div className='three item'>Three</div>
-      <div className='four item'>Four</div>
-      <div className='five item'>Five</div>
-      <div className='six item'>Six</div>
+      <h1>test</h1>
     </div>
   );
 };
