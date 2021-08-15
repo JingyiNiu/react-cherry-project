@@ -31,6 +31,10 @@ const theme = createTheme({
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [tokenExist, setTokenExist] = useState(
+    localStorage.getItem("token") !== null
+  );
+
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
@@ -84,15 +88,15 @@ function App() {
           </Route>
           <Route path='/test' exact component={Test} />
           <Route path='/products'>
-            {currentUser ? <ProductsPage /> : <Redirect to='/signin' />}
+            {tokenExist ? <ProductsPage /> : <Redirect to='/signin' />}
           </Route>
           <Route path='/orders'>
-            {currentUser ? <OrdersPage /> : <Redirect to='/signin' />}
+            {tokenExist ? <OrdersPage /> : <Redirect to='/signin' />}
           </Route>
           <Route path='/register' component={Register} />
           <Route path='/signin' exact>
             {currentUser ? (
-              <Redirect from='/products' to='/products' />
+              <Redirect to='/' />
             ) : (
               <Signin setCurrentUser={setCurrentUser} />
             )}
