@@ -89,8 +89,12 @@ function App() {
             {currentUser ? <OrdersPage /> : <Redirect to='/signin' />}
           </Route>
           <Route path='/register' component={Register} />
-          <Route path='/signin'>
-            <Signin setCurrentUser={setCurrentUser} />
+          <Route path='/signin' exact>
+            {currentUser ? (
+              <Redirect to='/' />
+            ) : (
+              <Signin setCurrentUser={setCurrentUser} />
+            )}
           </Route>
         </Switch>
         <Footer />
