@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 import "./nav.style.css";
 
 const Nav = (props) => {
-  const { currentUser, setCurrentUser, setNotify } = props;
+  const { currentUser, setCurrentUser, setNotify, setUserSignedIn } = props;
   const history = useHistory();
 
   const signOut = (e) => {
@@ -18,6 +18,7 @@ const Nav = (props) => {
 
     setTimeout(function () {
       setCurrentUser(null);
+      setUserSignedIn(false);
       localStorage.removeItem("token");
       history.push("/signin");
     }, 1500);

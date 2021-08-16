@@ -51,7 +51,7 @@ const initialFormValues = {
 };
 
 const SigninForm = (props) => {
-  const { setCurrentUser } = props;
+  const { setCurrentUser, setUserSignedIn } = props;
   const history = useHistory();
   const [rememberMe, setRememberMe] = useState(false);
 
@@ -113,6 +113,7 @@ const SigninForm = (props) => {
           });
           resetForm();
           setCurrentUser(response.data.data);
+          setUserSignedIn(true);
 
           // If <remenber me> is checked, save token to local storage
           if (rememberMe === true) {

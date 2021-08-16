@@ -31,7 +31,7 @@ const theme = createTheme({
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  const [tokenExist, setTokenExist] = useState(
+  const [userSignedIn, setUserSignedIn] = useState(
     localStorage.getItem("token") !== null
   );
 
@@ -44,7 +44,7 @@ function App() {
   useEffect(() => {
     removeTokenAfterExpiry();
     const token = getTokenFromLocalStorage();
-    if (token) {
+    if (token !== null) {
       setCurrentUser(token);
       console.log("current user exists");
     } else {
@@ -80,6 +80,7 @@ function App() {
         <Nav
           currentUser={currentUser}
           setCurrentUser={setCurrentUser}
+          setUserSignedIn={setUserSignedIn}
           setNotify={setNotify}
         />
         <Switch>
@@ -88,17 +89,20 @@ function App() {
           </Route>
           <Route path='/test' exact component={Test} />
           <Route path='/products'>
-            {tokenExist ? <ProductsPage /> : <Redirect to='/signin' />}
+            {userSignedIn ? <ProductsPage /> : <Redirect to='/signin' />}
           </Route>
           <Route path='/orders'>
-            {tokenExist ? <OrdersPage /> : <Redirect to='/signin' />}
+            {userSignedIn ? <OrdersPage /> : <Redirect to='/signin' />}
           </Route>
           <Route path='/register' component={Register} />
           <Route path='/signin' exact>
             {currentUser ? (
               <Redirect to='/' />
             ) : (
-              <Signin setCurrentUser={setCurrentUser} />
+              <Signin
+                setCurrentUser={setCurrentUser}
+                setUserSignedIn={setUserSignedIn}
+              />
             )}
           </Route>
           {/* <Route path='/signin' exact>
