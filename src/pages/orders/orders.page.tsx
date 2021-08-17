@@ -25,6 +25,7 @@ function TabPanel(props) {
 }
 
 const OrdersPage = (props) => {
+  const { axiosWithToken } = props;
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -47,7 +48,7 @@ const OrdersPage = (props) => {
         </Tabs>
       </Paper>
       <TabPanel value={value} index={0}>
-        <AllOrders />
+        <AllOrders axiosWithToken={axiosWithToken} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <OrdersInquiry />

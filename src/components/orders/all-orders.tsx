@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import AllOrderRow from "./all-order-row";
 import { Input } from "../controls/Input";
 
-import axios from "axios";
-
 import {
   withStyles,
   Theme,
@@ -83,6 +81,8 @@ const useStyles = makeStyles({
 
 // ################### All Orders ###################
 const AllOrders = (props) => {
+  const { axiosWithToken } = props;
+
   const classes = useStyles();
   const [orders, setOrders] = useState<any>([]);
   const [loading, setLoading] = useState(false);
@@ -91,9 +91,8 @@ const AllOrders = (props) => {
     let isMounted = true;
     const getAllOrders = async () => {
       try {
-        const url =
-          "http://206.189.39.185:5031/api/Order/GetOrderList/userId/status?status=9";
-        await axios.get(url).then((res) => {
+        const url = "/Order/GetOrderList/userId/status?status=9";
+        await axiosWithToken.get(url).then((res) => {
           if (isMounted) setOrders(res.data.data);
           setLoading(true);
         });
@@ -105,7 +104,7 @@ const AllOrders = (props) => {
     return () => {
       isMounted = false;
     };
-  }, [orders]);
+  }, [orders, axiosWithToken]);
 
   interface HeadCell {
     id: string;

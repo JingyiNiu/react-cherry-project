@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { Product } from "../../Interfaces/Product";
 import ProductRow from "./product-row";
@@ -68,7 +67,9 @@ const useStyles = makeStyles({
 });
 
 // ################### Products Table ###################
-const Products = () => {
+const Products = (props) => {
+  const { axiosWithToken } = props;
+
   const classes = useStyles();
   const [products, setProducts] = useState<Product[]>([]);
 
@@ -76,8 +77,8 @@ const Products = () => {
     let isMounted = true;
     const getProducts = async () => {
       try {
-        const url = "http://206.189.39.185:5031/api/Product";
-        await axios.get(url).then((res) => {
+        const url = "/Product";
+        await axiosWithToken.get(url).then((res) => {
           if (isMounted) setProducts(res.data.data);
         });
       } catch (error) {
@@ -88,7 +89,7 @@ const Products = () => {
     return () => {
       isMounted = false;
     };
-  }, [products]);
+  }, [products, axiosWithToken]);
 
   interface HeadCell {
     id: string;
@@ -296,6 +297,7 @@ const Products = () => {
                 notify={notify}
                 setNotify={setNotify}
                 confirmDialog={confirmDialog}
+                axiosWithToken={axiosWithToken}
               />
             ))}
           </TableBody>

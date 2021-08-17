@@ -6,6 +6,8 @@ import {
   Redirect,
 } from "react-router-dom";
 
+import axios from "axios";
+
 import Nav from "./components/nav/nav.component";
 import Footer from "./components/footer/footer.component";
 
@@ -30,7 +32,8 @@ const theme = createTheme({
 });
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState<any>(null);
+
   const [userSignedIn, setUserSignedIn] = useState(
     localStorage.getItem("token") !== null
   );
@@ -41,17 +44,28 @@ function App() {
     type: "",
   });
 
+  const apiUrl = "http://206.189.39.185:5031/api";
+  const axiosWithToken =
+    userSignedIn && currentUser !== null
+      ? axios.create({
+          baseURL: apiUrl,
+          headers: {
+            Authorization: `Request Token: ${currentUser.token}`,
+          },
+        })
+      : axios.create({ baseURL: apiUrl });
+
   useEffect(() => {
     removeTokenAfterExpiry();
     const token = getTokenFromLocalStorage();
     if (token !== null) {
       setCurrentUser(token);
-      console.log("current user exists");
+      console.log("current user exists", currentUser);
     } else {
       setCurrentUser(null);
       console.log("no user");
     }
-  }, []);
+  }, [currentUser]);
 
   const removeTokenAfterExpiry = () => {
     const tokenString = localStorage.getItem("token");
@@ -84,17 +98,36 @@ function App() {
           setNotify={setNotify}
         />
         <Switch>
+          {/* homepage */}
           <Route path='/' exact>
             <HomePage currentUser={currentUser} />
           </Route>
+
+          {/* test page */}
           <Route path='/test' exact component={Test} />
+
+          {/* products page */}
           <Route path='/products'>
-            {userSignedIn ? <ProductsPage /> : <Redirect to='/signin' />}
+            {userSignedIn ? (
+              <ProductsPage axiosWithToken={axiosWithToken} />
+            ) : (
+              <Redirect to='/signin' />
+            )}
           </Route>
+
+          {/* orders page */}
           <Route path='/orders'>
-            {userSignedIn ? <OrdersPage /> : <Redirect to='/signin' />}
+            {userSignedIn ? (
+              <OrdersPage axiosWithToken={axiosWithToken} />
+            ) : (
+              <Redirect to='/signin' />
+            )}
           </Route>
+
+          {/* register page */}
           <Route path='/register' component={Register} />
+
+          {/* sign in page */}
           <Route path='/signin' exact>
             {currentUser ? (
               <Redirect to='/' />
@@ -105,9 +138,8 @@ function App() {
               />
             )}
           </Route>
-          {/* <Route path='/signin' exact>
-            <Signin setCurrentUser={setCurrentUser} />
-          </Route> */}
+
+          {/* other pages */}
           <Route path='*' component={PageNotFound} />
         </Switch>
         <Footer />

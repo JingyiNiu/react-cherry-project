@@ -3,8 +3,6 @@ import { Product } from "../../Interfaces/Product";
 import { Input } from "../controls/Input";
 import { ProductError } from "../../Interfaces/ProductError";
 
-import axios from "axios";
-
 import { makeStyles } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 
@@ -40,7 +38,7 @@ const ProductsForm = (props) => {
   const [values, setValues] = useState(initialFormValues);
   const [errors, setErrors] = useState({});
 
-  const { setOpenPopup, recordForEdit, setNotify } = props;
+  const { setOpenPopup, recordForEdit, setNotify, axiosWithToken } = props;
 
   const classes = useStyles();
 
@@ -131,12 +129,9 @@ const ProductsForm = (props) => {
         updatedAt: "",
       };
       if (!data.productId) {
-        axios.post(
-          "http://206.189.39.185:5031/api/Product/ProductCreate",
-          data
-        );
+        axiosWithToken.post("/Product/ProductCreate", data);
       } else {
-        axios.put("http://206.189.39.185:5031/api/Product/ProductUpdate", data);
+        axiosWithToken.put("/Product/ProductUpdate", data);
       }
       resetForm();
       setOpenPopup(false);
