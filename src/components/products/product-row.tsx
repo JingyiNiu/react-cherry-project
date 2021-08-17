@@ -123,15 +123,37 @@ const ProductRow = (props) => {
         >
           <Collapse in={open} timeout='auto' unmountOnExit>
             <Box margin={2}>
-              <li>
-                <strong>Product Name: </strong>
-                {item.productName}
-              </li>
-
-              <li>
-                <strong>Product ID: </strong>
-                {item.productId}
-              </li>
+              <div className='order-table'>
+                <table>
+                  <tbody>
+                    <tr>
+                      <th colSpan={6}>Product Details</th>
+                    </tr>
+                    <tr>
+                      <th>Product Image</th>
+                      <td colSpan={5}>
+                        <img
+                          src={item.imageUrl}
+                          alt='product image'
+                          width='200px'
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Product ID</th>
+                      <td>{item.productId}</td>
+                      <th>Product Name</th>
+                      <td>{item.productName}</td>
+                    </tr>
+                    <tr>
+                      <th>Product Code</th>
+                      <td>{item.productCode}</td>
+                      <th>Product Description</th>
+                      <td>{item.desciption}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </Box>
           </Collapse>
         </StyledTableCell>
