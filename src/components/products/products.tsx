@@ -325,6 +325,7 @@ const Products = (props) => {
           setOpenPopup={setOpenPopup}
           recordForEdit={recordForEdit}
           setNotify={setNotify}
+          axiosWithToken={axiosWithToken}
         />
       </PopupDialog>
 
