@@ -259,7 +259,6 @@ const AllOrders = (props) => {
 
   const resetButton = (e) => {
     e.preventDefault();
-    console.log("reset is clicked");
     const startHTML = document.getElementById("startDate") as HTMLInputElement;
     const endHTML = document.getElementById("endDate") as HTMLInputElement;
     startHTML.value = "";

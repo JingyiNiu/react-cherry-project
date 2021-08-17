@@ -60,12 +60,11 @@ function App() {
     const token = getTokenFromLocalStorage();
     if (token !== null) {
       setCurrentUser(token);
-      console.log("current user exists", currentUser);
     } else {
       setCurrentUser(null);
       console.log("no user");
     }
-  }, [currentUser]);
+  }, []);
 
   const removeTokenAfterExpiry = () => {
     const tokenString = localStorage.getItem("token");
