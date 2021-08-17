@@ -66,7 +66,7 @@ const initialFormValues = {
   email: "",
 };
 
-const RegisterForm = () => {
+const RegisterForm = (props) => {
   const classes = useStyles();
 
   const [values, setValues] = useState(initialFormValues);

@@ -124,7 +124,9 @@ function App() {
           </Route>
 
           {/* register page */}
-          <Route path='/register' component={Register} />
+          <Route path='/register' exact>
+            {currentUser ? <Redirect to='/' /> : <Register />}
+          </Route>
 
           {/* sign in page */}
           <Route path='/signin' exact>
