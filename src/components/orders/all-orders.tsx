@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import AllOrderRow from "./all-order-row";
 import { Input } from "../controls/Input";
+import GetAppIcon from "@material-ui/icons/GetApp";
+import XLSX from "xlsx";
 
 import {
   withStyles,
@@ -77,6 +79,9 @@ const useStyles = makeStyles({
     padding: "100px 0",
     textAlign: "center",
   },
+  rightToolbar: {
+    display: "flex",
+  },
 });
 
 // ################### All Orders ###################
@@ -151,6 +156,17 @@ const AllOrders = (props) => {
     },
     { id: "status", label: "Status", numeric: false, disableSorting: false },
   ];
+
+  // ******************* Download Excel *******************
+  const downloadExcel = () => {
+    const newData = orders.map((row) => {
+      return row;
+    });
+    const workSheet = XLSX.utils.json_to_sheet(newData);
+    const workBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workBook, workSheet, "orders");
+    XLSX.writeFile(workBook, "OrdersData.xlsx");
+  };
 
   // ******************* Pagination *******************
   const pages = [10, 15, 25];
@@ -294,40 +310,51 @@ const AllOrders = (props) => {
           }}
         />
 
-        {/* Date */}
-        <form className={classes.container}>
-          <TextField
-            id='startDate'
-            label='Start Date'
-            type='date'
-            className={classes.textField}
-            onChange={handelStartDateChange}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <TextField
-            id='endDate'
-            label='End Date'
-            type='date'
-            className={classes.textField}
-            onChange={handelEndDateChange}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
+        <div className={classes.rightToolbar}>
+          {/* Date */}
+          <form className={classes.container}>
+            <TextField
+              id='startDate'
+              label='Start Date'
+              type='date'
+              className={classes.textField}
+              onChange={handelStartDateChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              id='endDate'
+              label='End Date'
+              type='date'
+              className={classes.textField}
+              onChange={handelEndDateChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
 
-          <button className='button btn-primary' onClick={handleFilterByDate}>
-            Filter By Date Range
-          </button>
+            <button className='button btn-primary' onClick={handleFilterByDate}>
+              Filter By Date Range
+            </button>
+            <button
+              className='button btn-gray'
+              onClick={resetButton}
+              type='reset'
+            >
+              Reset
+            </button>
+          </form>
+
+          {/* download button */}
           <button
-            className='button btn-gray'
-            onClick={resetButton}
-            type='reset'
+            className='download-button'
+            title='Download Excle File'
+            onClick={downloadExcel}
           >
-            Reset
+            <GetAppIcon fontSize='medium' />
           </button>
-        </form>
+        </div>
       </Toolbar>
 
       {/* Table */}

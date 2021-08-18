@@ -7,6 +7,7 @@ import Notification from "../notification";
 
 import { Input } from "../controls/Input";
 import GetAppIcon from "@material-ui/icons/GetApp";
+import XLSX from "xlsx";
 
 import {
   withStyles,
@@ -124,9 +125,15 @@ const Products = (props) => {
     { id: "actions", numeric: true, label: "Actions", disableSorting: true },
   ];
 
+  // ******************* Download Excel *******************
   const downloadExcel = () => {
-    console.log("downloadExcel is clicked");
-    console.log(products);
+    const newData = products.map((row) => {
+      return row;
+    });
+    const workSheet = XLSX.utils.json_to_sheet(newData);
+    const workBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workBook, workSheet, "products");
+    XLSX.writeFile(workBook, "ProductsData.xlsx");
   };
 
   // ******************* Pagination *******************

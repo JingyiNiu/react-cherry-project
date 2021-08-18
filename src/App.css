@@ -55,6 +55,9 @@ input::-webkit-input-placeholder {
 }
 
 .download-button {
+  margin-left: 10px;
+  height: 100%;
+  align-self: center;
   display: block;
   border: none;
   padding: 10px 10px 5px;
