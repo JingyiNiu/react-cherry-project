@@ -110,7 +110,8 @@ const ProductsForm = (props) => {
     setFile(fileToUpload);
   };
 
-  const handleFileSUpload = () => {
+  const handleFileSUpload = (e) => {
+    e.preventDefault();
     let formData = new FormData();
 
     formData.append("imageFile", file);
@@ -118,7 +119,8 @@ const ProductsForm = (props) => {
     axiosWithToken
       .post("/Common/UploadImage", formData)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
+        setValues({ ...values, imageUrl: response.data });
       })
       .catch((error) => {
         console.log(error);
@@ -127,6 +129,7 @@ const ProductsForm = (props) => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+
     if (validate()) {
       const data: Product = {
         productId: values.productId,
