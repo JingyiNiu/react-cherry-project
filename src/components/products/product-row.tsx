@@ -134,7 +134,7 @@ const ProductRow = (props) => {
                       <td colSpan={5}>
                         <img
                           src={item.imageUrl}
-                          alt='product image'
+                          alt='product item'
                           width='200px'
                         />
                       </td>

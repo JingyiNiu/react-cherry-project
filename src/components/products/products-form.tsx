@@ -3,8 +3,7 @@ import { Product } from "../../Interfaces/Product";
 import { Input } from "../controls/Input";
 import { ProductError } from "../../Interfaces/ProductError";
 
-import { makeStyles } from "@material-ui/core";
-import { Grid } from "@material-ui/core";
+import { makeStyles, Grid, TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,10 +34,11 @@ const initialFormValues = {
 };
 
 const ProductsForm = (props) => {
+  const { setOpenPopup, recordForEdit, setNotify, axiosWithToken } = props;
+
   const [values, setValues] = useState(initialFormValues);
   const [errors, setErrors] = useState({});
-
-  const { setOpenPopup, recordForEdit, setNotify, axiosWithToken } = props;
+  const [file, setFile] = useState<any>(null);
 
   const classes = useStyles();
 
@@ -103,6 +103,26 @@ const ProductsForm = (props) => {
 
   const resetForm = () => {
     setValues(initialFormValues);
+  };
+
+  const handleFileChange = (e) => {
+    const fileToUpload = e.target.files[0];
+    setFile(fileToUpload);
+  };
+
+  const handleFileSUpload = () => {
+    let formData = new FormData();
+
+    formData.append("imageFile", file);
+
+    axiosWithToken
+      .post("/Common/UploadImage", formData)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleSubmit = (e: any) => {
@@ -175,13 +195,25 @@ const ProductsForm = (props) => {
             onChange={handleInputChange}
             value={values.desciption}
           />
-
           <Input
             name='imageUrl'
             label='Image URL'
             onChange={handleInputChange}
             value={values.imageUrl}
           />
+          <TextField
+            type='file'
+            label='Image Upload'
+            margin='normal'
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant='outlined'
+            onChange={handleFileChange}
+          />
+          <button className='button btn-primary' onClick={handleFileSUpload}>
+            Upload Image
+          </button>
         </Grid>
         <Grid item xs={3}>
           <Input

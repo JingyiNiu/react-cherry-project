@@ -103,7 +103,9 @@ function App() {
           </Route>
 
           {/* test page */}
-          <Route path='/test' exact component={Test} />
+          <Route path='/test' exact>
+            <Test axiosWithToken={axiosWithToken} currentUser={currentUser} />
+          </Route>
 
           {/* products page */}
           <Route path='/products'>
