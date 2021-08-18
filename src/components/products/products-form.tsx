@@ -214,7 +214,10 @@ const ProductsForm = (props) => {
             variant='outlined'
             onChange={handleFileChange}
           />
-          <button className='button btn-primary' onClick={handleFileSUpload}>
+          <button
+            className='button btn-primary align-btn'
+            onClick={handleFileSUpload}
+          >
             Upload Image
           </button>
         </Grid>

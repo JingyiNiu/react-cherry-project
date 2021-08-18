@@ -71,6 +71,10 @@ input::-webkit-input-placeholder {
   background-color: #eee;
 }
 
+.align-btn {
+  margin-left: 10px;
+}
+
 .order-table table {
   width: 100%;
 }
