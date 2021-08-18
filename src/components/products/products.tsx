@@ -6,6 +6,7 @@ import PopupDialog from "../popup-dialoge";
 import Notification from "../notification";
 
 import { Input } from "../controls/Input";
+import GetAppIcon from "@material-ui/icons/GetApp";
 
 import {
   withStyles,
@@ -55,14 +56,15 @@ const useStyles = makeStyles({
     },
   },
   searchInput: {
-    width: "60%",
+    width: "500px",
   },
   toolbar: {
     marginBottom: "20px",
+    display: "flex",
+    justifyContent: "space-between",
   },
-  addButton: {
-    position: "absolute",
-    right: "10px",
+  rightToolbar: {
+    display: "flex",
   },
 });
 
@@ -121,6 +123,11 @@ const Products = (props) => {
     },
     { id: "actions", numeric: true, label: "Actions", disableSorting: true },
   ];
+
+  const downloadExcel = () => {
+    console.log("downloadExcel is clicked");
+    console.log(products);
+  };
 
   // ******************* Pagination *******************
   const pages = [10, 15, 25];
@@ -240,17 +247,27 @@ const Products = (props) => {
             ),
           }}
         />
+        <div className={classes.rightToolbar}>
+          {/* Add New Button */}
+          <button
+            className='button btn-primary'
+            onClick={() => {
+              setOpenPopup(true);
+              setRecordForEdit(null);
+            }}
+          >
+            + New Product
+          </button>
 
-        {/* Add New Button */}
-        <button
-          className={`button btn-primary ${classes.addButton}`}
-          onClick={() => {
-            setOpenPopup(true);
-            setRecordForEdit(null);
-          }}
-        >
-          + New Product
-        </button>
+          {/* download button */}
+          <button
+            className='download-button'
+            title='Download Excle File'
+            onClick={downloadExcel}
+          >
+            <GetAppIcon fontSize='medium' />
+          </button>
+        </div>
       </Toolbar>
 
       {/* Table */}

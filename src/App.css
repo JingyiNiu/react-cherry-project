@@ -54,6 +54,20 @@ input::-webkit-input-placeholder {
   background-color: rgb(228, 228, 228);
 }
 
+.download-button {
+  display: block;
+  border: none;
+  padding: 10px 10px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+}
+
+.download-button:hover {
+  background-color: #eee;
+}
+
 .order-table table {
   width: 100%;
 }
